@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE I - Test 2 Interactive Simulator</title>
+    <!-- Versión estable de Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .correct { background-color: #d1fae5; border-color: #10b981; color: #065f46; }
+        .incorrect { background-color: #fee2e2; border-color: #ef4444; color: #991b1b; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden p-6 border border-gray-200">
+        
+        <!-- MAIN SIMULATOR HEADER -->
+        <div class="text-center border-b-2 border-indigo-100 pb-4 mb-6">
+            <h1 class="text-4xl font-extrabold text-indigo-600 tracking-tight">Succeed in TRINITY ISE I</h1>
+            <p class="text-gray-500 font-semibold mt-1 text-lg">Exam Preparation Simulator — Test 2</p>
+        </div>
+
+        <!-- MAIN TASK SWITCHER TABS -->
+        <div class="flex justify-center space-x-4 mb-8 bg-slate-100 p-2 rounded-lg border border-slate-200">
+            <button onclick="switchMainTask('task1-master')" id="btn-task1-master" class="flex-1 py-3 font-bold text-center rounded-md bg-indigo-600 text-white shadow-sm cursor-pointer transition">
+                🚇 TASK 1: Long Reading (The Tube)
+            </button>
+            <button onclick="switchMainTask('task2-master')" id="btn-task2-master" class="flex-1 py-3 font-bold text-center rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 cursor-pointer transition">
+                🏰 TASK 2: Multi-text Reading (Arundel Castle)
+            </button>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!--            MASTER CONTAINER: TASK 1        -->
+        <!-- ========================================== -->
+        <div id="task1-master" class="main-task-content block animate-fadeIn">
+            
+            <!-- Sub Navigation Tabs for Task 1 -->
+            <div class="flex space-x-1 mb-6 border-b border-gray-200 pb-2 overflow-x-auto">
+                <button onclick="switchSubTab('t1', 't1-text')" id="btn-t1-text" class="px-4 py-2 font-semibold text-sm rounded-t-lg bg-indigo-600 text-white cursor-pointer whitespace-nowrap">Reading Text</button>
+                <button onclick="switchSubTab('t1', 't1-ex1')" id="btn-t1-ex1" class="px-4 py-2 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap">Questions 1-5 (Titles)</button>
+                <button onclick="switchTabT1TrueFalse('t1-ex2')" id="btn-t1-ex2" class="px-4 py-2 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap">Questions 6-10 (True/False)</button>
+                <button onclick="switchSubTab('t1', 't1-ex3')" id="btn-t1-ex3" class="px-4 py-2 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap">Questions 11-15 (Gaps)</button>
+            </div>
+
+            <!-- T1 SUB-TAB: READING TEXT -->
+            <div id="t1-text" class="t1-tab-content block space-y-4 text-justify leading-relaxed">
+                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg space-y-2">
+                    <p class="text-indigo-900 font-bold text-base">📢 INSTRUCCIONES DE LA TAREA 1:</p>
+                    <p class="text-indigo-950 text-xs italic font-medium bg-white px-3 py-1.5 rounded border border-indigo-100 inline-block">
+                        "Read the following text about the London Underground and answer the 15 questions on the next page."
+                    </p>
+                    <div class="text-indigo-800 text-xs space-y-1">
+                        <p><strong>1. Lectura comprensiva:</strong> Lee los 5 párrafos del texto explicativo sobre el metro de Londres (<strong>The tube</strong>).</p>
+                        <p><strong>2. Responder y comprobar:</strong> Navega por las siguientes pestañas de ejercicios. Al pulsar el botón azul inferior de cada pantalla, recibirás corrección automatizada inmediata con justificaciones.</p>
+                    </div>
+                </div>
+
+                <h2 class="text-2xl font-bold text-gray-900 border-l-4 border-indigo-500 pl-2">The tube</h2>
+                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <span class="font-bold text-indigo-700 block mb-1">Paragraph 1</span>
+                    The first time somebody thought of linking the City of London with other railway stations was in the 1830s and soon the Metropolitan Railway started building this line in 1854. Almost a decade later the world's first underground railway opened to connect Paddington and Farringdon. Very soon, around 1868, the Metropolitan District Railway opened from South Kensington to Westminster, connecting London's main-line terminal stations. And the rest, as they say, is history.
+                </div>
+                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <span class="font-bold text-indigo-700 block mb-1">Paragraph 2</span>
+                    The Underground today serves 270 stations, out of which fourteen are outside Greater London. Some of the biggest and busiest stations include: Waterloo, King's Cross, St. Pancras, Oxford Circus and Victoria. There are 11 lines in total in the London Underground, 402 kilometres in length, which are known either by their name or colour as shown on the Tube map. For example, people also call the Central line the Red line. Another interesting fact is that trains operate both above and under the surface of the earth, making the name Underground a bit misleading. Actually, 55% of the system now runs above ground.
+                </div>
+                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <span class="font-bold text-indigo-700 block mb-1">Paragraph 3</span>
+                    The Tube opens at 5am every morning Monday to Friday and a bit later at weekends. It runs until just after midnight, around 1 o'clock. In the event of a public holiday, such as New Year, or a major event, like the Olympics, some lines stay open longer to help passengers get around. On Christmas Eve, however, the Underground runs a limited service and on Christmas Day it does not operate at all.
+                </div>
+                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <span class="font-bold text-indigo-700 block mb-1">Paragraph 4</span>
+                    In order to use the London Underground effectively one has to know the zonal fare system. There are nine zones, with the first one being the most central and the rest gradually expanding towards the outside. Ticket prices vary according to the zone your destination belongs to. Paper tickets are one option, but most passengers nowadays use Oyster cards, which are pre-paid cards that can actually be used on other means of transport, like the Overground, buses, trams, the National Railway etc. Oyster cards have been very popular as passengers get discounts this way.
+                </div>
+                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <span class="font-bold text-indigo-700 block mb-1">Paragraph 5</span>
+                    On weekdays, there are peak hours when great numbers of people use the London Underground. The morning 'rush hour' is between about 7.30am and 9.30am and the evening peak time is between 4.30pm and 6.30pm. During these hours stations can get so busy and crowded that passengers may not manage to get on the first train and most of them do not even get a seat on their train.
+                </div>
+            </div>
+
+            <!-- T1 SUB-TAB: EX 1 (TITLES) -->
+            <div id="t1-ex1" class="t1-tab-content hidden space-y-4">
+                <h2 class="text-xl font-bold text-gray-900">Questions 1-5 (Choose the best title)</h2>
+                <p class="text-sm text-gray-600 mb-4">Selecciona el mejor título para cada párrafo. Hay una opción de título que no necesitas usar.</p>
+                
+                <div class="space-y-3">
+                    <div class="p-3 border rounded-lg flex flex-col justify-between items-start gap-2" id="t1q1-container">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 w-full">
+                            <span class="font-medium">1. Paragraph 1</span>
+                            <select id="t1q1" class="border p-1 rounded bg-white w-full md:w-72">
+                                <option value="">Choose title...</option>
+                                <option value="A">A. Brief history of London transport</option>
+                                <option value="B">B. Operating hours</option>
+                                <option value="C">C. Accessibility to the London Underground</option>
+                                <option value="D">D. Main lines and stations in the London Underground</option>
+                                <option value="E">E. The Underground zones and tickets</option>
+                                <option value="F">F. Rush hour and overcrowding</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="p-3 border rounded-lg flex flex-col justify-between items-start gap-2" id="t1q2-container">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 w-full">
+                            <span class="font-medium">2. Paragraph 2</span>
+                            <select id="t1q2" class="border p-1 rounded bg-white w-full md:w-72">
+                                <option value="">Choose title...</option>
+                                <option value="A">A. Brief history of London transport</option>
+                                <option value="B">B. Operating hours</option>
+                                <option value="C">C. Accessibility to the London Underground</option>
+                                <option value="D">D. Main lines and stations in the London Underground</option>
+                                <option value="E">E. The Underground zones and tickets</option>
+                                <option value="F">F. Rush hour and overcrowding</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="p-3 border rounded-lg flex flex-col justify-between items-start gap-2" id="t1q3-container">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 w-full">
+                            <span class="font-medium">3. Paragraph 3</span>
+                            <select id="t1q3" class="border p-1 rounded bg-white w-full md:w-72">
+                                <option value="">Choose title...</option>
+                                <option value="A">A. Brief history of London transport</option>
+                                <option value="B">B. Operating hours</option>
+                                <option value="C">C. Accessibility to the London Underground</option>
+                                <option value="D">D. Main lines and stations in the London Underground</option>
+                                <option value="E">E. The Underground zones and tickets</option>
+                                <option value="F">F. Rush hour and overcrowding</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="p-3 border rounded-lg flex flex-col justify-between items-start gap-2" id="t1q4-container">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 w-full">
+                            <span class="font-medium">4. Paragraph 4</span>
+                            <select id="t1q4" class="border p-1 rounded bg-white w-full md:w-72">
+                                <option value="">Choose title...</option>
+                                <option value="A">A. Brief history of London transport</option>
+                                <option value="B">B. Operating hours</option>
+                                <option value="C">C. Accessibility to the London Underground</option>
+                                <option value="D">D. Main lines and stations in the London Underground</option>
+                                <option value="E">E. The Underground zones and tickets</option>
+                                <option value="F">F. Rush hour and overcrowding</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="p-3 border rounded-lg flex flex-col justify-between items-start gap-2" id="t1q5-container">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 w-full">
+                            <span class="font-medium">5. Paragraph 5</span>
+                            <select id="t1q5" class="border p-1 rounded bg-white w-full md:w-72">
+                                <option value="">Choose title...</option>
+                                <option value="A">A. Brief history of London transport</option>
+                                <option value="B">B. Operating hours</option>
+                                <option value="C">C. Accessibility to the London Underground</option>
+                                <option value="D">D. Main lines and stations in the London Underground</option>
+                                <option value="E">E. The Underground zones and tickets</option>
+                                <option value="F">F. Rush hour and overcrowding</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="checkT1Titles()" class="mt-4 bg-indigo-600 text-white font-bold px-6 py-2 rounded shadow hover:bg-indigo-700 cursor-pointer">Check Answers</button>
+            </div>
+
+            <!-- T1 SUB-TAB: EX 2 (TRUE/FALSE) -->
+            <div id="t1-ex2" class="t1-tab-content hidden space-y-4">
+                <h2 class="text-xl font-bold text-gray-900">Questions 6-10 (Select 5 TRUE statements)</h2>
+                <p class="text-sm text-gray-600 mb-4">Marca las <strong>5 afirmaciones</strong> que consideres que son verdaderas basándote únicamente en el texto.</p>
+                
+                <div class="space-y-2" id="t1tf-container">
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t1tf-box-A">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t1tf-A" class="mt-1">
+                            <span><strong>A.</strong> The City of London was connected to other railway stations in the 1830s.</span>
+                        </label>
+                    </div>
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t1tf-box-B">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t1tf-B" class="mt-1">
+                            <span><strong>B.</strong> A larger part of the London Underground operates on the Earth's surface, rather than under it.</span>
+                        </label>
+                    </div>
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t1tf-box-C">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t1tf-C" class="mt-1">
+                            <span><strong>C.</strong> There are occasions when the London Underground remains closed.</span>
+                        </label>
+                    </div>
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t1tf-box-D">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t1tf-D" class="mt-1">
+                            <span><strong>D.</strong> Rush hours in the Tube last for the most part of the day.</span>
+                        </label>
+                    </div>
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t1tf-box-E">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t1tf-E" class="mt-1">
+                            <span><strong>E.</strong> Oyster cards can be very effective if you want to move around London.</span>
+                        </label>
+                    </div>
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t1tf-box-F">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t1tf-F" class="mt-1">
+                            <span><strong>F.</strong> On a weekday, the Tube is closed for only 4 hours at night.</span>
+                        </label>
+                    </div>
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t1tf-box-G">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t1tf-G" class="mt-1">
+                            <span><strong>G.</strong> Not all tickets in the London Underground cost the same amount of money.</span>
+                        </label>
+                    </div>
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t1tf-box-H">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t1tf-H" class="mt-1">
+                            <span><strong>H.</strong> All Underground stations are inside Greater London.</span>
+                        </label>
+                    </div>
+                </div>
+                <div id="t1tf-feedback" class="text-sm font-semibold text-red-600 hidden my-2">Please select exactly 5 statements.</div>
+                <button onclick="checkT1TrueFalse()" class="mt-4 bg-indigo-600 text-white font-bold px-6 py-2 rounded shadow hover:bg-indigo-700 cursor-pointer">Check Answers</button>
+            </div>
+
+            <!-- T1 SUB-TAB: EX 3 (GAPS) -->
+            <div id="t1-ex3" class="t1-tab-content hidden space-y-4">
+                <h2 class="text-xl font-bold text-gray-900">Questions 11-15 (Sentence Completion)</h2>
+                <p class="text-sm text-gray-600 mb-4">Completa los espacios utilizando entre 1 y 3 palabras exactas extraídas directamente de la lectura.</p>
+                
+                <div class="space-y-4 shadow-sm bg-gray-50 p-4 rounded-lg">
+                    <div class="flex flex-col gap-1 p-2 border border-transparent rounded" id="t1g11-container">
+                        <label class="leading-loose"><strong>11.</strong> When Paddington was connected to Farringdon, the <input type="text" id="t1g11" class="border-b-2 border-indigo-500 px-2 outline-none w-56 text-center bg-white rounded"> railway became a reality.</label>
+                    </div>
+                    <div class="flex flex-col gap-1 p-2 border border-transparent rounded" id="t1g12-container">
+                        <label class="leading-loose"><strong>12.</strong> Their name or colour are the two ways by which the Tube lines <input type="text" id="t1g12" class="border-b-2 border-indigo-500 px-2 outline-none w-56 text-center bg-white rounded">.</label>
+                    </div>
+                    <div class="flex flex-col gap-1 p-2 border border-transparent rounded" id="t1g13-container">
+                        <label class="leading-loose"><strong>13.</strong> The London Underground sometimes has to extend its working hours, for example when it's <input type="text" id="t1g13" class="border-b-2 border-indigo-500 px-2 outline-none w-56 text-center bg-white rounded">.</label>
+                    </div>
+                    <div class="flex flex-col gap-1 p-2 border border-transparent rounded" id="t1g14-container">
+                        <label class="leading-loose"><strong>14.</strong> The nine Underground zones are <input type="text" id="t1g14" class="border-b-2 border-indigo-500 px-2 outline-none w-56 text-center bg-white rounded">, from the centre to the outer areas.</label>
+                    </div>
+                    <div class="flex flex-col gap-1 p-2 border border-transparent rounded" id="t1g15-container">
+                        <label class="leading-loose"><strong>15.</strong> One of the major problems in the London Underground is during rush hours, when it is <input type="text" id="t1g15" class="border-b-2 border-indigo-500 px-2 outline-none w-56 text-center bg-white rounded">.</label>
+                    </div>
+                </div>
+                <button onclick="checkT1Gaps()" class="mt-4 bg-indigo-600 text-white font-bold px-6 py-2 rounded shadow hover:bg-indigo-700 cursor-pointer">Check Answers</button>
+            </div>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!--            MASTER CONTAINER: TASK 2        -->
+        <!-- ========================================== -->
+        <div id="task2-master" class="main-task-content hidden animate-fadeIn">
+            
+            <!-- Sub Navigation Tabs for Task 2 -->
+            <div class="flex space-x-1 mb-6 border-b border-gray-200 pb-2 overflow-x-auto">
+                <button onclick="switchSubTab('t2', 't2-text')" id="btn-t2-text" class="px-4 py-2 font-semibold text-sm rounded-t-lg bg-indigo-600 text-white cursor-pointer whitespace-nowrap">Reading Texts (A-D)</button>
+                <button onclick="switchSubTab('t2', 't2-ex1')" id="btn-t2-ex1" class="px-4 py-2 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap">Questions 16-20 (Matching)</button>
+                <button onclick="switchTabT2TrueFalse('t2-ex2')" id="btn-t2-ex2" class="px-4 py-2 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap">Questions 21-25 (True/False)</button>
+                <button onclick="switchSubTab('t2', 't2-ex3')" id="btn-t2-ex3" class="px-4 py-2 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap">Questions 26-30 (Summary)</button>
+            </div>
+
+            <!-- T2 SUB-TAB: READING TEXTS -->
+            <div id="t2-text" class="t2-tab-content block space-y-6 text-justify leading-relaxed">
+                
+                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg space-y-2">
+                    <p class="text-indigo-900 font-bold text-lg">📢 INSTRUCCIONES DE LA TAREA 2:</p>
+                    <p class="text-indigo-950 text-sm italic font-medium bg-white px-3 py-1.5 rounded border border-indigo-100 inline-block">
+                        "In this part there are four short texts for you to read and 15 questions for you to answer."
+                    </p>
+                    <div class="text-indigo-800 text-sm space-y-1">
+                        <p><strong>1. Multi-Textos:</strong> Estudia las cuatro fuentes documentales sobre el Castillo de Arundel (Blog, Guía de Jardines, Horarios y Reseñas de viajes).</p>
+                        <p><strong>2. Panel e Indicadores:</strong> Dispones de un mapa conceptual esquematizado para comprender la estructura del complejo de forma rápida antes de pasar a los tests.</p>
+                    </div>
+                </div>
+
+                <!-- Text A -->
+                <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                    <span class="font-bold text-blue-700 block mb-2 font-mono">Text A — Anna's Blog</span>
+                    <strong>Hi Guys!</strong><br>
+                    I just came back from Arundel in West Sussex and I must say I'm amazed. I got the chance to visit Arundel Castle, which was on a hill and had an incredible view to the local river, Arun. We went on a tour and found out interesting things about the Castle and Gardens. It has been around since the 11th century and all this time it has been the home of the Dukes of Norfolk, and that's a lot of time actually; almost 1,000 years! Many of its parts are still the same today, like the gatehouse and a part of one of its towers. Most of it has been rebuilt, though, in the 1800s. And you know what's the most exciting part? The 18th Duke of Norfolk still lives there with his family.
+                </div>
+
+                <!-- Text B & Map Layout Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-emerald-50 p-4 rounded-lg border border-emerald-100 md:col-span-2">
+                        <span class="font-bold text-emerald-700 block mb-2 font-mono">Text B — The Collector Earl's Garden</span>
+                        In 2008 a new garden was opened in Arundel Castle, known as the Collector Earl's Garden. The Garden takes its name from the 14th Earl of Arundel, famous for his art collection. Back then, construction took three decades to complete and the Gardens served as a place for the Earl to exhibit his art collection. Original plans from the 17th century were used as inspiration to achieve the present design. The garden today is a unique sight. The plants are marvellous, including palms, bamboos, etc. Each spring the Tulip Festival is hosted in the Earl's Garden and fills the castle with life and colour.
+                    </div>
+                    
+                    <!-- Castle Map Legend Box -->
+                    <div class="bg-slate-100 p-4 rounded-lg border border-slate-300 text-xs shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="font-bold text-slate-700 block mb-2 border-b pb-1 border-slate-300">🗺️ CASTLE GROUNDS MAP LEGEND</span>
+                            <ul class="space-y-1 font-medium text-slate-600">
+                                <li><span class="inline-block w-4 h-4 bg-indigo-200 text-indigo-800 text-center rounded-full text-[10px] font-bold mr-1">1</span> Collector Earl's Garden</li>
+                                <li><span class="inline-block w-4 h-4 bg-indigo-200 text-indigo-800 text-center rounded-full text-[10px] font-bold mr-1">2</span> Fitzalan Chapel</li>
+                                <li><span class="inline-block w-4 h-4 bg-indigo-200 text-indigo-800 text-center rounded-full text-[10px] font-bold mr-1">3</span> Bevis Tower</li>
+                                <li><span class="inline-block w-4 h-4 bg-indigo-200 text-indigo-800 text-center rounded-full text-[10px] font-bold mr-1">4</span> Barbican</li>
+                                <li><span class="inline-block w-4 h-4 bg-indigo-200 text-indigo-800 text-center rounded-full text-[10px] font-bold mr-1">5</span> High Street Lodge / Exit</li>
+                                <li><span class="inline-block w-4 h-4 bg-indigo-200 text-indigo-800 text-center rounded-full text-[10px] font-bold mr-1">6</span> Kitchen Garden</li>
+                                <li><span class="inline-block w-4 h-4 bg-indigo-200 text-indigo-800 text-center rounded-full text-[10px] font-bold mr-1">7</span> Victorian Greenhouse</li>
+                                <li><span class="inline-block w-4 h-4 bg-indigo-200 text-indigo-800 text-center rounded-full text-[10px] font-bold mr-1">8</span> Rose Garden</li>
+                            </ul>
+                        </div>
+                        <div class="bg-indigo-600 text-white rounded text-center py-1 mt-2 font-bold tracking-wider select-none text-[10px]">ARUNDEL COMPLEX PLAN</div>
+                    </div>
+                </div>
+
+                <!-- Text C -->
+                <div class="bg-amber-50 p-4 rounded-lg border border-amber-100">
+                    <span class="font-bold text-amber-700 block mb-2 font-mono">Text C — Arundel Castle Opening Times & Information</span>
+                    <p class="font-semibold text-amber-900 border-b border-amber-200 pb-1 mb-2">Open: Saturday 28th March to Sunday 1st November (Tuesdays to Sundays inclusive, May Bank Holiday Mondays & August Mondays)</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm font-medium text-amber-950">
+                        <div class="bg-white/60 p-2 rounded">🌿 Gardens & Grounds: 10.00 - 17.00</div>
+                        <div class="bg-white/60 p-2 rounded">⛪ Fitzalan Chapel: 10.00 - 17.00</div>
+                        <div class="bg-white/60 p-2 rounded">☕ Restaurant & Coffee Shop: 10.00 - 16.30</div>
+                        <div class="bg-white/60 p-2 rounded">🎁 Gift Shop: 10.00 - 17.00</div>
+                        <div class="bg-white/60 p-2 rounded">🏰 Castle Keep: 10.00 - 16.30</div>
+                        <div class="bg-white/60 p-2 rounded">🚪 Castle Rooms: 12.00 - 17.00</div>
+                    </div>
+                </div>
+
+                <!-- Text D (Styled Trip Reviews Widget) -->
+                <div class="bg-stone-50 p-4 rounded-lg border border-stone-200 space-y-3">
+                    <span class="font-bold text-stone-700 block font-mono">Text D — Arundel Castle Reviews</span>
+                    
+                    <div class="bg-white border rounded p-3 shadow-sm">
+                        <div class="flex justify-between border-b pb-1 mb-1.5 text-xs text-stone-500 font-bold">
+                            <span>⭐ "Ticket pricing questionable"</span>
+                            <span class="text-amber-500">★★★☆☆</span>
+                        </div>
+                        <p class="text-sm text-stone-700 italic">"As good as the attraction is I was somewhat surprised at the ticketing system: I found it quite expensive. And the same goes for the cafe and the gift shop - they were also overpriced, to say the least."</p>
+                    </div>
+
+                    <div class="bg-white border rounded p-3 shadow-sm">
+                        <div class="flex justify-between border-b pb-1 mb-1.5 text-xs text-stone-500 font-bold">
+                            <span>⭐ "For history-lovers, we recommend a 'gold' ticket and plenty of time"</span>
+                            <span class="text-amber-500">★★★★☆</span>
+                        </div>
+                        <p class="text-sm text-stone-700 italic">"This castle is one of the largest and one of the most impressive we've ever seen in Europe, but visitors are only allowed in certain sections even with full-priced tickets."</p>
+                    </div>
+
+                    <div class="bg-white border rounded p-3 shadow-sm">
+                        <div class="flex justify-between border-b pb-1 mb-1.5 text-xs text-stone-500 font-bold">
+                            <span>⭐ "Great service"</span>
+                            <span class="text-amber-500">★★★★★</span>
+                        </div>
+                        <p class="text-sm text-stone-700 italic">"Plenty of very friendly staff to help and inform you. Everything explained in a very accessible way and lots of information to guide you round."</p>
+                    </div>
+
+                    <div class="bg-white border rounded p-3 shadow-sm">
+                        <div class="flex justify-between border-b pb-1 mb-1.5 text-xs text-stone-500 font-bold">
+                            <span>⭐ "Enjoyable visit"</span>
+                            <span class="text-amber-500">★★★★☆</span>
+                        </div>
+                        <p class="text-sm text-stone-700 italic">"We enjoyed our visit to Arundel Castle although we were very disappointed by the ban on photography inside the castle."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- T2 SUB-TAB: MATCHING -->
+            <div id="t2-ex1" class="t2-tab-content hidden space-y-4">
+                <h2 class="text-xl font-bold text-gray-900">Questions 16-20 (Which text refers to...?)</h2>
+                <p class="text-sm text-gray-600 mb-4">Decide a qué texto (A, B, C o D) se refiere cada una de las siguientes afirmaciones de la prueba.</p>
+                
+                <div class="space-y-3">
+                    <div class="p-3 border rounded-lg flex flex-col justify-between items-start gap-2" id="t2q16-container">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 w-full">
+                            <span class="font-medium">16. provides information about the opening hours of Arundel Castle?</span>
+                            <select id="t2q16" class="border p-1 rounded bg-white w-full md:w-48">
+                                <option value="">Choose...</option>
+                                <option value="A">Text A</option>
+                                <option value="B">Text B</option>
+                                <option value="C">Text C</option>
+                                <option value="D">Text D</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="p-3 border rounded-lg flex flex-col justify-between items-start gap-2" id="t2q17-container">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 w-full">
+                            <span class="font-medium">17. presents some negative facts about the castle?</span>
+                            <select id="t2q17" class="border p-1 rounded bg-white w-full md:w-48">
+                                <option value="">Choose...</option>
+                                <option value="A">Text A</option>
+                                <option value="B">Text B</option>
+                                <option value="C">Text C</option>
+                                <option value="D">Text D</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="p-3 border rounded-lg flex flex-col justify-between items-start gap-2" id="t2q18-container">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 w-full">
+                            <span class="font-medium">18. focuses on the outside area of the castle?</span>
+                            <select id="t2q18" class="border p-1 rounded bg-white w-full md:w-48">
+                                <option value="">Choose...</option>
+                                <option value="A">Text A</option>
+                                <option value="B">Text B</option>
+                                <option value="C">Text C</option>
+                                <option value="D">Text D</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="p-3 border rounded-lg flex flex-col justify-between items-start gap-2" id="t2q19-container">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 w-full">
+                            <span class="font-medium">19. tells us when the castle was built?</span>
+                            <select id="t2q19" class="border p-1 rounded bg-white w-full md:w-48">
+                                <option value="">Choose...</option>
+                                <option value="A">Text A</option>
+                                <option value="B">Text B</option>
+                                <option value="C">Text C</option>
+                                <option value="D">Text D</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="p-3 border rounded-lg flex flex-col justify-between items-start gap-2" id="t2q20-container">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 w-full">
+                            <span class="font-medium">20. shows us how something today is based on something in the past?</span>
+                            <select id="t2q20" class="border p-1 rounded bg-white w-full md:w-48">
+                                <option value="">Choose...</option>
+                                <option value="A">Text A</option>
+                                <option value="B">Text B</option>
+                                <option value="C">Text C</option>
+                                <option value="D">Text D</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="checkT2Matching()" class="mt-4 bg-indigo-600 text-white font-bold px-6 py-2 rounded shadow hover:bg-indigo-700 cursor-pointer">Check Answers</button>
+            </div>
+
+            <!-- T2 SUB-TAB: TRUE/FALSE -->
+            <div id="t2-ex2" class="t2-tab-content hidden space-y-4">
+                <h2 class="text-xl font-bold text-gray-900">Questions 21-25 (Select 5 TRUE statements)</h2>
+                <p class="text-sm text-gray-600 mb-4">Marca las <strong>5 afirmaciones</strong> que son verdaderas según los textos.</p>
+                
+                <div class="space-y-2" id="t2tf-container">
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t2tf-box-A">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t2tf-A" class="mt-1">
+                            <span><strong>A.</strong> Arundel Castle is today only a monument of the past.</span>
+                        </label>
+                    </div>
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t2tf-box-B">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="tf-B" class="mt-1"> <!-- kept same logic target id below -->
+                            <input type="checkbox" id="t2tf-B" class="hidden"> 
+                            <span><strong>B.</strong> The Collector Earl's Garden is a relatively new addition to the castle.</span>
+                        </label>
+                    </div>
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t2tf-box-C">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t2tf-C" class="mt-1">
+                            <span><strong>C.</strong> Tickets to Arundel Castle are quite expensive.</span>
+                        </label>
+                    </div>
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t2tf-box-D">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t2tf-D" class="mt-1">
+                            <span><strong>D.</strong> Visitors cannot see Arundel Castle all year round.</span>
+                        </label>
+                    </div>
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t2tf-box-E">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t2tf-E" class="mt-1">
+                            <span><strong>E.</strong> Arundel Castle offers a great view of the local river.</span>
+                        </label>
+                    </div>
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t2tf-box-F">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t2tf-F" class="mt-1">
+                            <span><strong>F.</strong> Photographs are allowed everywhere in the castle.</span>
+                        </label>
+                    </div>
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t2tf-box-G">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t2tf-G" class="mt-1">
+                            <span><strong>G.</strong> Visitors can see everything inside the castle.</span>
+                        </label>
+                    </div>
+                    <div class="flex flex-col p-2 border rounded hover:bg-gray-50" id="t2tf-box-H">
+                        <label class="flex items-start space-x-3 cursor-pointer">
+                            <input type="checkbox" id="t2tf-H" class="mt-1">
+                            <span><strong>H.</strong> Not all parts of the castle close at the same time for visitors.</span>
+                        </label>
+                    </div>
+                </div>
+                <div id="t2tf-feedback" class="text-sm font-semibold text-red-600 hidden my-2">Please select exactly 5 statements.</div>
+                <button onclick="checkT2TrueFalse()" class="mt-4 bg-indigo-600 text-white font-bold px-6 py-2 rounded shadow hover:bg-indigo-700 cursor-pointer">Check Answers</button>
+            </div>
+
+            <!-- T2 SUB-TAB: GAPS -->
+            <div id="t2-ex3" class="t2-tab-content hidden space-y-4">
+                <h2 class="text-xl font-bold text-gray-900">Questions 26-30 (Summary Notes)</h2>
+                <p class="text-sm text-gray-600 mb-4">Completa los espacios utilizando de 1 a 3 palabras extraídas directamente de los textos.</p>
+                
+                <div class="space-y-4 shadow-sm bg-gray-50 p-4 rounded-lg">
+                    <div class="flex flex-col gap-1 p-2 border border-transparent rounded" id="t2g26-container">
+                        <label class="leading-loose"><strong>26.</strong> Basic Info: Located in Arundel, in West Sussex, <input type="text" id="t2g26" class="border-b-2 border-indigo-500 px-2 outline-none w-56 text-center bg-white rounded"> near the river Arun.</label>
+                    </div>
+                    <div class="flex flex-col gap-1 p-2 border border-transparent rounded" id="t2g27-container">
+                        <label class="leading-loose"><strong>27.</strong> History: Built in 11th century; some parts still original, though most of the castle <input type="text" id="t2g27" class="border-b-2 border-indigo-500 px-2 outline-none w-56 text-center bg-white rounded">.</label>
+                    </div>
+                    <div class="flex flex-col gap-1 p-2 border border-transparent rounded" id="t2g28-container">
+                        <label class="leading-loose"><strong>28.</strong> Gardens based on <input type="text" id="t2g28" class="border-b-2 border-indigo-500 px-2 outline-none w-56 text-center bg-white rounded"> from an older garden version.</label>
+                    </div>
+                    <div class="flex flex-col gap-1 p-2 border border-transparent rounded" id="t2g29-container">
+                        <label class="leading-loose"><strong>29.</strong> Things you might not like: People <input type="text" id="t2g29" class="border-b-2 border-indigo-500 px-2 outline-none w-56 text-center bg-white rounded"> in specific parts of the castle; not all of it.</label>
+                    </div>
+                    <div class="flex flex-col gap-1 p-2 border border-transparent rounded" id="t2g30-container">
+                        <label class="leading-loose"><strong>30.</strong> Things you might not like: Quite expensive tickets and the high prices at the cafe and <input type="text" id="t2g30" class="border-b-2 border-indigo-500 px-2 outline-none w-56 text-center bg-white rounded">.</label>
+                    </div>
+                </div>
+                <button onclick="checkT2Gaps()" class="mt-4 bg-indigo-600 text-white font-bold px-6 py-2 rounded shadow hover:bg-indigo-700 cursor-pointer">Check Answers</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SIMULATOR CORE SCRIPT LOGIC -->
+    <script>
+        // Master Task Navigation
+        function switchMainTask(masterTaskId) {
+            document.querySelectorAll('.main-task-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(masterTaskId).classList.remove('hidden');
+            
+            const btn1 = document.getElementById('btn-task1-master');
+            const btn2 = document.getElementById('btn-task2-master');
+            
+            if (masterTaskId === 'task1-master') {
+                btn1.className = "flex-1 py-3 font-bold text-center rounded-md bg-indigo-600 text-white shadow-sm cursor-pointer transition";
+                btn2.className = "flex-1 py-3 font-bold text-center rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 cursor-pointer transition";
+            } else {
+                btn2.className = "flex-1 py-3 font-bold text-center rounded-md bg-indigo-600 text-white shadow-sm cursor-pointer transition";
+                btn1.className = "flex-1 py-3 font-bold text-center rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 cursor-pointer transition";
+            }
+        }
+
+        // Sub Tab Navigation Handler
+        function switchSubTab(prefix, tabId) {
+            document.querySelectorAll('.' + prefix + '-tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+            
+            document.querySelectorAll('[id^="btn-' + prefix + '-"]').forEach(btn => {
+                if (btn.id === 'btn-' + tabId) {
+                    btn.className = "px-4 py-2 font-semibold text-sm rounded-t-lg bg-indigo-600 text-white cursor-pointer whitespace-nowrap";
+                } else {
+                    btn.className = "px-4 py-2 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap";
+                }
+            });
+        }
+
+        // Explicit route for checkboxes tab layout safety
+        function switchTabT1TrueFalse(tabId) { switchSubTab('t1', tabId); }
+        function switchTabT2TrueFalse(tabId) { switchSubTab('t2', tabId); }
+
+        // ==========================================
+        //         TASK 1 EVALUATION LOGIC
+        // ==========================================
+        function checkT1Titles() {
+            const answers = { t1q1: 'A', t1q2: 'D', t1q3: 'B', t1q4: 'E', t1q5: 'F' };
+            const explanations = {
+                t1q1: 'Respuesta: A (Brief history of London transport). El párrafo 1 narra el desarrollo inicial del metro de Londres desde 1830, su construcción en 1854 y sus aperturas primarias.',
+                t1q2: 'Respuesta: D (Main lines and stations in the London Underground). El párrafo 2 detalla datos estadísticos modernos de las 270 estaciones activos, las 11 líneas totales y su codificación cromática.',
+                t1q3: 'Respuesta: B (Operating hours). El párrafo 3 detalla explícitamente los horarios fijos de apertura (5am) y cierre nocturno (1am), así como variaciones en días festivos y Navidad.',
+                t1q4: 'Respuesta: E (The Underground zones and tickets). El párrafo 4 profundiza en el sistema tarifario dividido en 9 zonas físicas, billetes convencionales de papel y el uso de tarjetas prepago Oyster.',
+                t1q5: 'Respuesta: F (Rush hour and overcrowding). El párrafo 5 expone los intervalos punta (peak hours) del tráfico de pasajeros diarios y los consecuentes problemas de falta de espacio en vagones y andenes.'
+            };
+            document.querySelectorAll('.t1title-exp').forEach(el => el.remove());
+
+            Object.keys(answers).forEach(id => {
+                const select = document.getElementById(id);
+                const container = document.getElementById(id + '-container');
+                if (select.value === answers[id]) {
+                    container.className = "p-3 border rounded-lg flex flex-col justify-between items-start gap-2 correct";
+                } else {
+                    container.className = "p-3 border rounded-lg flex flex-col justify-between items-start gap-2 incorrect";
+                    const p = document.createElement('p');
+                    p.className = 't1title-exp text-xs mt-1 font-semibold text-red-800 bg-white/60 p-1.5 rounded w-full border border-red-200';
+                    p.innerText = explanations[id];
+                    container.appendChild(p);
+                }
+            });
+        }
+
+        function checkT1TrueFalse() {
+            const correctKeys = ['B', 'C', 'E', 'F', 'G'];
+            const checkedInputs = [];
+            ['A','B','C','D','E','F','G','H'].forEach(l => {
+                if(document.getElementById('t1tf-' + l).checked) checkedInputs.push(l);
+            });
+            const feedback = document.getElementById('t1tf-feedback');
+            
+            if (checkedInputs.length !== 5) {
+                feedback.classList.remove('hidden');
+                return;
+            }
+            feedback.classList.add('hidden');
+            document.querySelectorAll('.t1tf-exp').forEach(el => el.remove());
+
+            const explanations = {
+                A: 'Falsa. En 1830 surgió únicamente la idea conceptual; el enlace físico real y las obras comenzaron en 1854.',
+                B: '¡Verdadera! El texto confirma de manera directa que el 55% de la red de vías opera en la superficie exterior.',
+                C: '¡Verdadera! Señala de manera explícita que el día de Navidad el metro cierra por completo de cara a los usuarios.',
+                D: 'Falsa. Las horas críticas duran franjas concretas por la mañana y por la tarde; no abarcan la mayor parte de la jornada.',
+                E: '¡Verdadera! Explica que el uso masivo de las Oyster cards ofrece facilidades de intermodalidad y descuentos directos.',
+                F: '¡Verdadera! Si el metro abre a las 5 am y cierra de forma general a la 1 am, la red descansa justamente 4 horas de madrugada.',
+                G: '¡Verdadera! El precio final del billete está vinculado de forma directa con la zona geográfica específica de destino.',
+                H: 'Falsa. El párrafo 2 indica con precisión que 14 estaciones se sitúan fuera de los límites del Gran Londres.'
+            };
+
+            ['A','B','C','D','E','F','G','H'].forEach(letter => {
+                const input = document.getElementById('t1tf-' + letter);
+                const box = document.getElementById('t1tf-box-' + letter);
+                let showExplanation = false;
+
+                if (correctKeys.includes(letter)) {
+                    if (input.checked) {
+                        box.className = "flex flex-col p-2 border rounded correct";
+                    } else {
+                        box.className = "flex flex-col p-2 border rounded border-yellow-400 bg-yellow-50 text-yellow-800";
+                        showExplanation = true;
+                    }
+                } else {
+                    if (input.checked) {
+                        box.className = "flex flex-col p-2 border rounded incorrect";
+                        showExplanation = true;
+                    } else {
+                        box.className = "flex flex-col p-2 border rounded border-gray-200 text-gray-400";
+                    }
+                }
+
+                if (showExplanation) {
+                    const p = document.createElement('p');
+                    p.className = 't1tf-exp text-xs mt-1 font-semibold p-1.5 rounded bg-white/70 w-full border';
+                    if (correctKeys.includes(letter)) {
+                        p.className += ' text-yellow-800 border-yellow-300';
+                        p.innerText = 'Debiste marcarla. ' + explanations[letter];
+                    } else {
+                        p.className += ' text-red-800 border-red-200';
+                        p.innerText = 'No debiste marcarla. ' + explanations[letter];
+                    }
+                    box.appendChild(p);
+                }
+            });
+        }
+
+        function checkT1Gaps() {
+            const criteria = {
+                t1g11: ["world's first underground"],
+                t1g12: ["are known"],
+                t1g13: ["a public holiday", "a major event", "the olympics"],
+                t1g14: ["gradually expanding"],
+                t1g15: ["busy", "crowded", "busy and crowded"]
+            };
+            const exact = {
+                t1g11: "world's first underground", t1g12: "are known",
+                t1g13: "a public holiday / a major event", t1g14: "gradually expanding",
+                t1g15: "busy (and crowded)"
+            };
+            document.querySelectorAll('.t1gap-exp').forEach(el => el.remove());
+
+            Object.keys(criteria).forEach(id => {
+                const val = document.getElementById(id).value.trim().toLowerCase();
+                const container = document.getElementById(id + '-container');
+                let isCorrect = false;
+                
+                criteria[id].forEach(opt => {
+                    if (val.includes(opt) && val !== "") isCorrect = true;
+                });
+
+                if (isCorrect) {
+                    container.className = "flex flex-col gap-1 p-2 rounded correct border border-emerald-300";
+                } else {
+                    container.className = "flex flex-col gap-1 p-2 rounded incorrect border border-red-300";
+                    const p = document.createElement('p');
+                    p.className = 't1gap-exp text-xs mt-1 font-semibold text-red-800 bg-white/60 p-1.5 rounded border border-red-200';
+                    p.innerText = `Clave exacta: "${exact[id]}". Sacado de la lectura original.`;
+                    container.appendChild(p);
+                }
+            });
+        }
+
+
+        // ==========================================
+        //         TASK 2 EVALUATION LOGIC
+        // ==========================================
+        function checkT2Matching() {
+            const answers = { t2q16: 'C', t2q17: 'D', t2q18: 'B', t2q19: 'A', t2q20: 'B' };
+            const explanations = {
+                t2q16: 'Respuesta: Text C. Es el documento que contiene de manera estricta los listados de horarios comerciales de entrada a los sectores del complejo.',
+                t2q17: 'Respuesta: Text D. Reúne las quejas y valoraciones críticas sobre los precios abusivos, las zonas prohibidas y el veto de fotografías.',
+                t2q18: 'Respuesta: Text B. Centrado por entero en la descripción de las zonas ajardinadas exteriores ("The Collector Earl\'s Garden").',
+                t2q19: 'Respuesta: Text A. Anna confirma literalmente en su diario de viaje digital que la construcción data originalmente del siglo XI ("since the 11th century").',
+                t2q20: 'Respuesta: Text B. Explica formalmente que el diseño actual del paisaje exterior se realizó tomando como base unos planos originales rescatados del siglo XVII.'
+            };
+            document.querySelectorAll('.t2match-exp').forEach(el => el.remove());
+
+            Object.keys(answers).forEach(q => {
+                const select = document.getElementById(q);
+                const container = document.getElementById(q + '-container');
+                if (select.value === answers[q]) {
+                    container.className = "p-3 border rounded-lg flex flex-col justify-between items-start gap-2 correct";
+                } else {
+                    container.className = "p-3 border rounded-lg flex flex-col justify-between items-start gap-2 incorrect";
+                    const p = document.createElement('p');
+                    p.className = 't2match-exp text-xs mt-1 font-semibold text-red-800 bg-white/60 p-1.5 rounded w-full border border-red-200';
+                    p.innerText = explanations[q];
+                    container.appendChild(p);
+                }
+            });
+        }
+
+        function checkT2TrueFalse() {
+            const correctKeys = ['B', 'C', 'D', 'E', 'H'];
+            const checkedInputs = [];
+            
+            if(document.getElementById('t2tf-A').checked) checkedInputs.push('A');
+            // Check both visible proxy checkbox and potential internal reference safely
+            if(document.getElementById('tf-B').checked || document.getElementById('t2tf-B').checked) checkedInputs.push('B');
+            if(document.getElementById('t2tf-C').checked) checkedInputs.push('C');
+            if(document.getElementById('t2tf-D').checked) checkedInputs.push('D');
+            if(document.getElementById('t2tf-E').checked) checkedInputs.push('E');
+            if(document.getElementById('t2tf-F').checked) checkedInputs.push('F');
+            if(document.getElementById('t2tf-G').checked) checkedInputs.push('G');
+            if(document.getElementById('t2tf-H').checked) checkedInputs.push('H');
+
+            const feedback = document.getElementById('t2tf-feedback');
+            if (checkedInputs.length !== 5) {
+                feedback.classList.remove('hidden');
+                return;
+            }
+            feedback.classList.add('hidden');
+            document.querySelectorAll('.t2tf-exp').forEach(el => el.remove());
+
+            const explanations = {
+                A: 'Falsa. El texto C desmiente que sea solo una ruina arqueológica del pasado; el 18º Duque de Norfolk y su familia residen allí de forma habitual en la actualidad.',
+                B: '¡Verdadera! El Text B aclara que la inauguración formal de esta sección de jardines tuvo lugar de forma reciente en el año 2008.',
+                C: '¡Verdadera! Múltiples valoraciones de usuarios del Text D denuncian que tanto las entradas como los servicios de cafetería son desproporcionados ("quite expensive").',
+                D: '¡Verdadera! El calendario operativo indica restricciones estacionales forzosas; el recinto permanece cerrado durante el invierno.',
+                E: '¡Verdadera! Anna relata con entusiasmo en su bitácora digital que la fortaleza está en una colina que goza de vistas panorámicas hacia el río Arun.',
+                F: 'Falsa. Las opiniones críticas protestan formalmente debido a que existe un veto estricto a capturar imágenes en el interior ("ban on photography inside").',
+                G: 'Falsa. Los historiadores y turistas se quejan de que los pases generales limitan el paso exclusivo a ciertas estancias reservadas.',
+                H: '¡Verdadera! La tabla informativa del Text C corrobora cierres escalonados independientes (unos recintos cierran a las 16:30 y otros a las 17:00).'
+            };
+
+            ['A','B','C','D','E','F','G','H'].forEach(letter => {
+                const input = (letter === 'B') ? document.getElementById('tf-B') : document.getElementById('t2tf-' + letter);
+                const box = document.getElementById('t2tf-box-' + letter);
+                let showExplanation = false;
+
+                if (correctKeys.includes(letter)) {
+                    if (input.checked) {
+                        box.className = "flex flex-col p-2 border rounded correct";
+                    } else {
+                        box.className = "flex flex-col p-2 border rounded border-yellow-400 bg-yellow-50 text-yellow-800";
+                        showExplanation = true;
+                    }
+                } else {
+                    if (input.checked) {
+                        box.className = "flex flex-col p-2 border rounded incorrect";
+                        showExplanation = true;
+                    } else {
+                        box.className = "flex flex-col p-2 border rounded border-gray-200 text-gray-400";
+                    }
+                }
+
+                if (showExplanation) {
+                    const p = document.createElement('p');
+                    p.className = 't2tf-exp text-xs mt-1 font-semibold p-1.5 rounded bg-white/70 w-full border';
+                    if (correctKeys.includes(letter)) {
+                        p.className += ' text-yellow-800 border-yellow-300';
+                        p.innerText = 'Debiste marcarla. ' + explanations[letter];
+                    } else {
+                        p.className += ' text-red-800 border-red-200';
+                        p.innerText = 'No debiste marcarla. ' + explanations[letter];
+                    }
+                    box.appendChild(p);
+                }
+            });
+        }
+
+        function checkT2Gaps() {
+            const criteria = {
+                t2g26: ['on a hill'],
+                t2g27: ['has been rebuilt', 'rebuilt'],
+                t2g28: ['original plans'],
+                t2g29: ['are only allowed', 'only allowed'],
+                t2g30: ['the gift shop', 'gift shop']
+            };
+            const exact = {
+                t2g26: "on a hill", t2g27: "has been rebuilt / rebuilt",
+                t2g28: "original plans", t2g29: "are only allowed",
+                t2g30: "the gift shop"
+            };
+            document.querySelectorAll('.t2gap-exp').forEach(el => el.remove());
+
+            Object.keys(criteria).forEach(id => {
+                const val = document.getElementById(id).value.trim().toLowerCase();
+                const container = document.getElementById(id + '-container');
+                let isCorrect = false;
+                
+                criteria[id].forEach(opt => {
+                    if (val.includes(opt) && val !== "") isCorrect = true;
+                });
+
+                if (isCorrect) {
+                    container.className = "flex flex-col gap-1 p-2 rounded correct border border-emerald-300";
+                } else {
+                    container.className = "flex flex-col gap-1 p-2 rounded incorrect border border-red-300";
+                    const p = document.createElement('p');
+                    p.className = 't2gap-exp text-xs mt-1 font-semibold text-red-800 bg-white/60 p-1.5 rounded border border-red-200';
+                    p.innerText = `Término exacto del texto: "${exact[id]}"`;
+                    container.appendChild(p);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
