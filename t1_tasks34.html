@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE I - Writing Tasks 3 & 4 Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .word-count-badge { transition: all 0.3s ease; }
+        .tab-active { background-color: #4f46e5; color: white; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 min-h-screen p-4 md:p-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden p-6 border border-gray-100">
+        <div class="text-center border-b border-gray-200 pb-4 mb-6">
+            <h1 class="text-3xl font-bold text-indigo-600">Succeed in TRINITY ISE I</h1>
+            <p class="text-gray-500 font-medium mt-1">Test 1 - Task 3 & 4: Interactive Writing Panel</p>
+        </div>
+        <div class="bg-indigo-50 rounded-xl p-4 mb-6 border border-indigo-100 space-y-3 shadow-sm">
+            <div class="flex items-center space-x-2">
+                <span class="text-xl">⚙️</span>
+                <h3 class="text-indigo-900 font-bold text-base uppercase tracking-wider">Información de Entrega</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                <div>
+                    <label class="block text-indigo-900 font-semibold mb-1">Email del Profesor:</label>
+                    <input type="email" id="teacher-email" value="franciscodecio@gmail.com" disabled class="w-full p-2 border rounded bg-slate-100 font-bold text-indigo-700 outline-none select-none">
+                </div>
+                <div>
+                    <label class="block text-indigo-900 font-semibold mb-1">Nombre del Alumno:</label>
+                    <input type="text" id="student-name" placeholder="Ej. Juan Pérez" class="w-full p-2 border rounded bg-white font-medium focus:ring-2 focus:ring-indigo-400 outline-none">
+                </div>
+                <div>
+                    <label class="block text-indigo-900 font-semibold mb-1">Tu Email (Alumno):</label>
+                    <input type="email" id="student-email" placeholder="Ej. tu-correo@gmail.com" class="w-full p-2 border rounded bg-white font-medium focus:ring-2 focus:ring-indigo-400 outline-none">
+                </div>
+            </div>
+            <div class="text-[12px] text-indigo-800 font-medium leading-relaxed bg-white/70 p-3 rounded border border-indigo-100">
+                🚀 <strong>¿Cómo entregar el ejercicio?:</strong> Escribe tus notas y tu redacción en los cuadros de abajo. Cuando termines, haz clic en el botón azul de <strong>"Descargar Archivo para Enviar"</strong>. Se guardará un archivo de texto en tu dispositivo. Luego, abre tu correo (Gmail, Hotmail, etc.), adjunta ese archivo y envíalo a: <span class="bg-indigo-100 text-indigo-900 px-1.5 py-0.5 rounded font-bold">franciscodecio@gmail.com</span>
+            </div>
+        </div>
+        <div class="flex space-x-2 mb-6 border-b border-gray-200 pb-2 overflow-x-auto">
+            <button onclick="switchTab('task3-tab')" id="btn-task3-tab" class="px-4 py-2.5 font-bold text-sm rounded-t-lg bg-indigo-600 text-white cursor-pointer whitespace-nowrap">
+                📝 Task 3: Reading into writing
+            </button>
+            <button onclick="switchTab('task4-tab')" id="btn-task4-tab" class="px-4 py-2.5 font-bold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap">
+                ✍️ Task 4: Extended writing
+            </button>
+        </div>
+        <div id="task3-tab" class="tab-content block space-y-4">
+            <div class="bg-amber-50/60 border-l-4 border-amber-500 p-4 rounded-r-lg space-y-1 text-sm">
+                <h3 class="font-bold text-amber-900 text-base">Task 3 — Reading into writing</h3>
+                <p class="text-gray-700 italic">"Write an article for your school magazine (100-130 words) about the relationship teenagers have with music. Use the information you read in Task 2 to:"</p>
+                <ul class="list-disc pl-5 text-gray-700 font-medium text-xs space-y-0.5 pt-1">
+                    <li>explain what types of music teenagers like today</li>
+                    <li>suggest how teenagers can benefit from music and</li>
+                    <li>say how the ways of listening to music have changed.</li>
+                </ul>
+            </div>
+            <div class="space-y-1.5">
+                <div class="flex justify-between items-center bg-slate-100 p-2 rounded-t-lg border-x border-t">
+                    <span class="text-sm font-bold text-slate-700">📋 Planning notes</span>
+                    <span class="text-[11px] text-slate-500 italic">(No marks are given for these planning notes)</span>
+                </div>
+                <textarea id="task3-planning" placeholder="Write your brainstorming, ideas or bullet points here..." class="w-full h-24 p-3 border rounded-b-lg resize-none outline-none focus:border-indigo-400 bg-slate-50 text-sm font-medium"></textarea>
+            </div>
+            <div class="space-y-1.5 relative">
+                <div class="flex justify-between items-center bg-indigo-50 p-2 rounded-t-lg border-x border-t border-indigo-100">
+                    <span class="text-sm font-bold text-indigo-900">✍️ Final Article (Target: 100 - 130 words)</span>
+                    <div id="task3-word-badge" class="word-count-badge text-xs font-bold px-2 py-0.5 rounded bg-red-100 text-red-700">
+                        Words: <span id="task3-count">0</span>
+                    </div>
+                </div>
+                <textarea id="task3-text" oninput="updateWordCount('task3')" placeholder="Now write your article here using your own words as far as possible..." class="w-full h-64 p-4 border rounded-b-lg outline-none focus:border-indigo-500 text-sm leading-relaxed" style="font-family: monospace;"></textarea>
+            </div>
+            <p class="text-xs text-slate-500 italic bg-slate-50 p-2 rounded border">
+                ⚠️ <strong>Check window:</strong> When you have finished your article, spend 2-3 minutes reading through what you have written. Make sure you have covered all three bullet points. Remember to check how you made use of the reading texts, as well as checking the language and organisation of your writing.
+            </p>
+            <div class="pt-2 flex justify-end">
+                <button onclick="downloadTextFile('task3')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-lg shadow-md cursor-pointer transition flex items-center space-x-2">
+                    <span>💾 Descargar Archivo para Enviar (Task 3)</span>
+                </button>
+            </div>
+        </div>
+        <div id="task4-tab" class="tab-content hidden space-y-4">
+            <div class="bg-teal-50 border-l-4 border-teal-500 p-4 rounded-r-lg space-y-1 text-sm">
+                <h3 class="font-bold text-teal-900 text-base">Task 4 — Extended writing</h3>
+                <p class="text-gray-700 italic">"Your school is doing a project on different forms of entertainment and you have been asked to write an essay (100-130 words) for your teacher about the different types of entertainment teenagers enjoy."</p>
+                <ul class="list-disc pl-5 text-gray-700 font-medium text-xs space-y-0.5 pt-1">
+                    <li>give examples of the different types of entertainment teenagers prefer and</li>
+                    <li>explain how entertainment is important in teenagers' lives.</li>
+                </ul>
+            </div>
+            <div class="space-y-1.5">
+                <div class="flex justify-between items-center bg-slate-100 p-2 rounded-t-lg border-x border-t">
+                    <span class="text-sm font-bold text-slate-700">📋 Planning notes</span>
+                    <span class="text-[11px] text-slate-500 italic">(No marks are given for these planning notes)</span>
+                </div>
+                <textarea id="task4-planning" placeholder="Write your essay framework, thesis or arguments here..." class="w-full h-24 p-3 border rounded-b-lg resize-none outline-none focus:border-indigo-400 bg-slate-50 text-sm font-medium"></textarea>
+            </div>
+            <div class="space-y-1.5 relative">
+                <div class="flex justify-between items-center bg-indigo-50 p-2 rounded-t-lg border-x border-t border-indigo-100">
+                    <span class="text-sm font-bold text-indigo-900">✍️ Final Essay (Target: 100 - 130 words)</span>
+                    <div id="task4-word-badge" class="word-count-badge text-xs font-bold px-2 py-0.5 rounded bg-red-100 text-red-700">
+                        Words: <span id="task4-count">0</span>
+                    </div>
+                </div>
+                <textarea id="task4-text" oninput="updateWordCount('task4')" placeholder="Now write your essay of 100-130 words here..." class="w-full h-64 p-4 border rounded-b-lg outline-none focus:border-indigo-500 text-sm leading-relaxed" style="font-family: monospace;"></textarea>
+            </div>
+            <p class="text-xs text-slate-500 italic bg-slate-50 p-2 rounded border">
+                ⚠️ <strong>Check window:</strong> When you have finished your essay, spend 2-3 minutes reading through what you have written. Make sure you have covered the two bullet points and remember to check the language and organisation of your writing.
+            </p>
+            <div class="pt-2 flex justify-end">
+                <button onclick="downloadTextFile('task4')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-lg shadow-md cursor-pointer transition flex items-center space-x-2">
+                    <span>💾 Descargar Archivo para Enviar (Task 4)</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+            ['task3-tab', 'task4-tab'].forEach(id => {
+                const btn = document.getElementById('btn-' + id);
+                if(id === tabId) {
+                    btn.className = "px-4 py-2.5 font-bold text-sm rounded-t-lg bg-indigo-600 text-white cursor-pointer whitespace-nowrap";
+                } else {
+                    btn.className = "px-4 py-2.5 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap";
+                }
+            });
+        }
+        function updateWordCount(prefix) {
+            const text = document.getElementById(prefix + '-text').value;
+            const words = text.trim().split(/\s+/).filter(Boolean);
+            const count = words.length;
+            document.getElementById(prefix + '-count').innerText = count;
+            const badge = document.getElementById(prefix + '-word-badge');
+            if (count === 0) {
+                badge.className = "word-count-badge text-xs font-bold px-2 py-0.5 rounded bg-red-100 text-red-700";
+            } else if (count >= 100 && count <= 130) {
+                badge.className = "word-count-badge text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 ring-2 ring-emerald-400 animate-pulse";
+            } else if ((count >= 85 && count < 100) || (count > 130 && count <= 145)) {
+                badge.className = "word-count-badge text-xs font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800";
+            } else {
+                badge.className = "word-count-badge text-xs font-bold px-2 py-0.5 rounded bg-red-100 text-red-700";
+            }
+        }
+        function downloadTextFile(taskKey) {
+            const studentName = document.getElementById('student-name').value.trim();
+            const studentEmail = document.getElementById('student-email').value.trim();
+            if (!studentName || !studentEmail) {
+                alert("❌ Por favor, escribe tu nombre y tu correo electrónico en las casillas superiores antes de descargar el archivo.");
+                return;
+            }
+            const planningNotes = document.getElementById(taskKey + '-planning').value.trim();
+            const finalWriting = document.getElementById(taskKey + '-text').value.trim();
+            const currentWordCount = document.getElementById(taskKey + '-count').innerText;
+            if (!finalWriting) {
+                alert("❌ La caja de redacción está vacía. Debes escribir tu texto antes de poder guardarlo.");
+                return;
+            }
+            const taskTitle = (taskKey === 'task3') ? "Task 3: Reading into writing (Magazine Article)" : "Task 4: Extended writing (Teacher Essay)";
+            let fileContent = `TRINITY ISE I - WRITING PRACTICE SUBMISSION\n`;
+            fileContent += `====================================================\n`;
+            fileContent += `STUDENT NAME  : ${studentName}\n`;
+            fileContent += `STUDENT EMAIL : ${studentEmail}\n`;
+            fileContent += `EXAM TASK     : ${taskTitle}\n`;
+            fileContent += `WORD COUNT    : ${currentWordCount} words\n`;
+            fileContent += `====================================================\n\n`;
+            fileContent += `[PART 1: PLANNING NOTES]\n`;
+            fileContent += `${planningNotes || 'No notes provided.'}\n\n`;
+            fileContent += `----------------------------------------------------\n\n`;
+            fileContent += `[PART 2: FINAL WRITING TEXT]\n`;
+            fileContent += `${finalWriting}\n\n`;
+            fileContent += `====================================================\n`;
+            fileContent += `📩 INSTRUCCIONES: Envía este archivo descargado por email a tu profesor a: franciscodecio@gmail.com`;
+            const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            const safeName = studentName.toLowerCase().replace(/[^a-z0-9]/gi, '_');
+            link.download = `${safeName}_trinity_${taskKey}.txt`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            alert(`💾 ¡Archivo descargado con éxito!\n\nTu redacción se ha guardado en tu carpeta de Descargas como un archivo de texto (.txt).\n\nAhora haz lo siguiente:\n1. Abre tu Gmail o Hotmail.\n2. Redacta un mensaje nuevo adjuntando este archivo.\n3. Envíalo a tu profesor al correo:\n👉 franciscodecio@gmail.com`);
+        }
+    </script>
+</body>
+</html>
