@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE I - Speaking & Listening Practice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .rec-dot { animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: .2; } }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 min-h-screen p-4 md:p-8">
+<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden p-6 border border-gray-200">
+
+    <div class="text-center border-b-2 border-indigo-100 pb-4 mb-6">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-indigo-600 tracking-tight">Succeed in TRINITY ISE I</h1>
+        <p class="text-gray-500 font-semibold mt-1 text-lg">Speaking & Listening — Práctica con grabación</p>
+        <a href="../" class="inline-block mt-2 text-sm text-indigo-600 underline">← ¿Primera vez? Lee antes la guía del examen</a>
+    </div>
+
+    <!-- STUDENT DATA -->
+    <div class="bg-indigo-50 rounded-xl p-4 mb-6 border border-indigo-100 space-y-3">
+        <h3 class="text-indigo-900 font-bold uppercase tracking-wider text-sm">👤 Tus datos (para nombrar tus audios)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+            <input id="st-name" oninput="updateTitles()" placeholder="Nombre (ej. Laura)" class="p-2 border rounded bg-white focus:ring-2 focus:ring-indigo-400 outline-none">
+            <input id="st-surname" oninput="updateTitles()" placeholder="Apellido(s) (ej. García López)" class="p-2 border rounded bg-white focus:ring-2 focus:ring-indigo-400 outline-none">
+        </div>
+        <div class="text-xs text-indigo-900 bg-white/70 p-3 rounded border border-indigo-100 leading-relaxed space-y-1">
+            <p>📱 <strong>Cómo enviarme tus audios por WhatsApp:</strong> cada parte se envía por separado con este título: <span class="font-mono bg-indigo-100 px-1 rounded">Speaking-Parte1-Nombre-Apellido</span>.</p>
+            <p><strong>Opción A (recomendada):</strong> graba con el grabador de cada parte. El archivo se crea ya con el nombre correcto; pulsa <em>Compartir</em> (en el móvil) y elige WhatsApp, o <em>Descargar</em> y adjúntalo.</p>
+            <p><strong>Opción B:</strong> envía una nota de voz de WhatsApp y, justo antes, escribe el título como mensaje (puedes copiarlo con el botón <em>Copiar título</em>).</p>
+            <p>🎧 Usa auriculares para que el audio del examen no se grabe encima de tu voz, y pausa la grabación mientras escuchas.</p>
+        </div>
+    </div>
+
+    <!-- PART TABS -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-6 bg-slate-100 p-2 rounded-lg border border-slate-200">
+        <button onclick="showPart(1)" id="tab-1" class="part-tab py-3 px-2 font-bold text-sm rounded-md cursor-pointer">🗣️ Parte 1<br><span class="font-medium text-xs">Topic</span></button>
+        <button onclick="showPart(2)" id="tab-2" class="part-tab py-3 px-2 font-bold text-sm rounded-md cursor-pointer">💬 Parte 2<br><span class="font-medium text-xs">Conversation</span></button>
+        <button onclick="showPart(3)" id="tab-3" class="part-tab py-3 px-2 font-bold text-sm rounded-md cursor-pointer">🎧 Parte 3<br><span class="font-medium text-xs">Listening Task 1</span></button>
+        <button onclick="showPart(4)" id="tab-4" class="part-tab py-3 px-2 font-bold text-sm rounded-md cursor-pointer">📝 Parte 4<br><span class="font-medium text-xs">Listening Task 2</span></button>
+    </div>
+
+    <!-- ================= PARTE 1: TOPIC ================= -->
+    <section id="part-1" class="part space-y-5">
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg text-sm space-y-1">
+            <p class="font-bold text-indigo-900 text-base">Parte 1 — Topic task (4 minutos)</p>
+            <p>Tú eliges el tema. Rellena tu <strong>Topic Form</strong> (el título y 4 puntos de los que quieres hablar). En el examen se lo das al examinador y él te hace preguntas a partir de esos puntos. No es un monólogo memorizado: es una conversación sobre tu tema.</p>
+            <p class="text-xs text-indigo-800">⚠️ El tema no puede ser uno de los de la Parte 2 (Travel, Money, Fashion, Rules and regulations, Health and fitness, Learning a foreign language).</p>
+        </div>
+
+        <div class="border rounded-lg p-4 space-y-3">
+            <p class="font-bold text-indigo-800">📋 Mi Topic Form</p>
+            <input id="tf-title" oninput="saveTopic()" placeholder="Title of topic (ej. My passion for cooking)" class="w-full p-2 border rounded font-semibold focus:ring-2 focus:ring-indigo-400 outline-none">
+            <div class="grid md:grid-cols-2 gap-2">
+                <input id="tf-1" placeholder="Point 1 (ej. How I started)" class="p-2 border rounded text-sm outline-none focus:ring-2 focus:ring-indigo-300">
+                <input id="tf-2" placeholder="Point 2 (ej. My favourite dishes)" class="p-2 border rounded text-sm outline-none focus:ring-2 focus:ring-indigo-300">
+                <input id="tf-3" placeholder="Point 3 (ej. A cooking disaster)" class="p-2 border rounded text-sm outline-none focus:ring-2 focus:ring-indigo-300">
+                <input id="tf-4" placeholder="Point 4 (ej. My plans for the future)" class="p-2 border rounded text-sm outline-none focus:ring-2 focus:ring-indigo-300">
+            </div>
+            <button onclick="downloadTopicForm()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold px-4 py-2 rounded text-sm cursor-pointer">💾 Descargar mi Topic Form</button>
+        </div>
+
+        <div class="border rounded-lg p-4 space-y-3">
+            <p class="font-bold text-indigo-800">🎙️ Cómo practicar</p>
+            <ol class="list-decimal pl-5 text-sm space-y-1">
+                <li>Empieza a grabar y presenta tu tema brevemente (unos 30-40 segundos): de qué vas a hablar y por qué lo elegiste.</li>
+                <li>Pulsa <strong>"Pregunta del examinador"</strong>: escucharás una pregunta en inglés. Contéstala desarrollando la idea (opinión + razón + ejemplo).</li>
+                <li>Repite con varias preguntas hasta llegar a unos 4 minutos.</li>
+                <li>Antes de terminar, hazle tú una pregunta al examinador (ej. <em>"Have you ever tried…?"</em>, <em>"What do you think about…?"</em>).</li>
+            </ol>
+            <div class="flex flex-wrap gap-2 items-center">
+                <button onclick="topicQuestion()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded cursor-pointer">🔊 Pregunta del examinador</button>
+                <span id="tq-text" class="text-sm italic text-gray-600"></span>
+            </div>
+        </div>
+        <div id="rec-1"></div>
+    </section>
+
+    <!-- ================= PARTE 2: CONVERSATION ================= -->
+    <section id="part-2" class="part hidden space-y-5">
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg text-sm space-y-1">
+            <p class="font-bold text-indigo-900 text-base">Parte 2 — Conversation task (2 minutos)</p>
+            <p>El examinador elige uno de estos 6 temas y te hace preguntas. Tú das tu opinión, la explicas y también le preguntas a él. No sabes qué tema te tocará, así que hay que practicar todos.</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+            <button onclick="randomConvTopic()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded cursor-pointer">🎲 Tema aleatorio (como en el examen)</button>
+            <select id="conv-select" onchange="setConvTopic(this.value)" class="border rounded p-2 text-sm">
+                <option value="">…o elige un tema</option>
+            </select>
+        </div>
+        <div id="conv-box" class="hidden border rounded-lg p-4 space-y-3">
+            <p class="font-bold text-lg text-indigo-800" id="conv-title"></p>
+            <p class="text-sm text-gray-600">Empieza a grabar. Pulsa cada pregunta para escucharla y contéstala en voz alta. Intenta hablar unos 2 minutos en total.</p>
+            <div id="conv-questions" class="space-y-2"></div>
+            <div class="text-xs bg-amber-50 border border-amber-200 rounded p-2 text-amber-900">💡 Truco: después de dar tu opinión, devuélvele la pregunta al examinador: <em>"What about you? Do you agree?"</em> Eso demuestra que sabes mantener la conversación.</div>
+        </div>
+        <div id="rec-2"></div>
+    </section>
+
+    <!-- ================= PARTE 3: LISTENING TASK 1 ================= -->
+    <section id="part-3" class="part hidden space-y-5">
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg text-sm space-y-1">
+            <p class="font-bold text-indigo-900 text-base">Parte 3 — Independent Listening Task 1</p>
+            <p>Escuchas una charla corta <strong>dos veces seguidas</strong> y puedes tomar notas. Después el examinador te hace <strong>6 preguntas</strong> y contestas con pocas palabras.</p>
+            <p class="text-xs text-indigo-800">Audios oficiales de práctica de Trinity College London.</p>
+        </div>
+        <select id="l1-select" onchange="setL1(this.value)" class="border rounded p-2 text-sm w-full md:w-auto">
+            <option value="">Elige un audio…</option>
+        </select>
+        <div id="l1-box" class="hidden space-y-4">
+            <div class="border rounded-lg p-4 space-y-2">
+                <p class="font-bold">Paso 1 · Escucha (2 veces)</p>
+                <p class="text-sm text-gray-600 italic" id="l1-rubric"></p>
+                <button id="l1-play" onclick="playL1()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded cursor-pointer">▶ Reproducir (2 veces)</button>
+                <span id="l1-status" class="text-sm font-semibold text-indigo-700 ml-2"></span>
+                <textarea placeholder="Tus notas…" class="w-full h-24 p-2 border rounded text-sm bg-slate-50"></textarea>
+            </div>
+            <div class="border rounded-lg p-4 space-y-2">
+                <p class="font-bold">Paso 2 · Contesta las 6 preguntas (en voz alta, grabando)</p>
+                <div id="l1-questions" class="space-y-2"></div>
+            </div>
+            <div class="border rounded-lg p-4 space-y-2">
+                <button onclick="toggle('l1-answers')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded cursor-pointer">✅ Ver respuestas</button>
+                <div id="l1-answers" class="hidden text-sm space-y-1"></div>
+            </div>
+        </div>
+        <div id="rec-3"></div>
+    </section>
+
+    <!-- ================= PARTE 4: LISTENING TASK 2 ================= -->
+    <section id="part-4" class="part hidden space-y-5">
+        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg text-sm space-y-1">
+            <p class="font-bold text-indigo-900 text-base">Parte 4 — Independent Listening Task 2</p>
+            <p>1) Escuchas <strong>una vez</strong> sin notas y dices en pocas palabras <strong>de qué trata</strong>. 2) Escuchas <strong>otra vez</strong> tomando notas. 3) Dices <strong>6 datos</strong> de la charla. 4) El examinador te hace <strong>4 preguntas</strong> más.</p>
+            <p class="text-xs text-indigo-800">Audios oficiales de práctica de Trinity College London.</p>
+        </div>
+        <select id="l2-select" onchange="setL2(this.value)" class="border rounded p-2 text-sm w-full md:w-auto">
+            <option value="">Elige un audio…</option>
+        </select>
+        <div id="l2-box" class="hidden space-y-4">
+            <div class="border rounded-lg p-4 space-y-2">
+                <p class="font-bold">Paso 1 · Primera escucha (sin notas)</p>
+                <p class="text-sm text-gray-600 italic" id="l2-rubric"></p>
+                <button onclick="playL2(1)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded cursor-pointer">▶ Primera escucha</button>
+                <span id="l2-status" class="text-sm font-semibold text-indigo-700 ml-2"></span>
+                <p class="text-sm">🎙️ Ahora di en voz alta: <em>"The talk is about…"</em></p>
+            </div>
+            <div class="border rounded-lg p-4 space-y-2">
+                <p class="font-bold">Paso 2 · Segunda escucha (con notas)</p>
+                <button onclick="playL2(2)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-4 py-2 rounded cursor-pointer">▶ Segunda escucha</button>
+                <textarea placeholder="Tus notas: palabras clave, números, nombres…" class="w-full h-28 p-2 border rounded text-sm bg-slate-50"></textarea>
+                <p class="text-sm">🎙️ Ahora di en voz alta <strong>seis datos</strong> de la charla: <em>"First, … Also, … Another thing is that…"</em></p>
+            </div>
+            <div class="border rounded-lg p-4 space-y-2">
+                <p class="font-bold">Paso 3 · Las 4 preguntas del examinador</p>
+                <button onclick="newL2Questions()" class="bg-slate-200 hover:bg-slate-300 font-bold px-3 py-1.5 rounded text-sm cursor-pointer">🔄 Otras 4 preguntas</button>
+                <div id="l2-questions" class="space-y-2"></div>
+            </div>
+            <div class="border rounded-lg p-4 space-y-2">
+                <button onclick="toggle('l2-answers')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded cursor-pointer">✅ Ver respuestas</button>
+                <div id="l2-answers" class="hidden text-sm space-y-1"></div>
+            </div>
+        </div>
+        <div id="rec-4"></div>
+    </section>
+
+    <audio id="player" preload="none"></audio>
+    <p class="text-center text-xs text-gray-400 mt-8 border-t pt-4">Puedes repetir cada parte todas las veces que quieras. Audios de Listening: © Trinity College London (materiales oficiales de práctica gratuitos).</p>
+</div>
+
+<script>
+// ===================== CONFIG =====================
+const WHATSAPP_NUMBER = '34693519339'; // Formato internacional sin "+" ni espacios, ej. 34600111222. Si se deja vacío, no se muestra el botón de abrir chat.
+const TRINITY = id => `https://www.trinitycollege.com/resource?id=${id}&stream`;
+
+// ===================== DATA =====================
+const TOPIC_QS = [
+    'Why did you choose {t} as your topic?',
+    'When did you first become interested in {t}?',
+    'Have you ever had a problem or a funny experience related to {t}?',
+    'What do you like most about {t}? Why?',
+    'Do you think you will still be interested in {t} in ten years? Why?',
+    'Would you recommend {t} to other people? Why or why not?',
+    'How has {t} changed your life?',
+    'What would you say to someone who knows nothing about {t}?',
+    'If you could change one thing about {t}, what would it be?',
+    'Do your friends or family share your interest in {t}?'
+];
+const CONV = {
+    'Travel': ['Do you like travelling? Why or why not?', 'What is the best place you have ever visited?', 'Do you prefer travelling by plane, train or car? Why?', 'What do you always take with you when you go on holiday?', 'Would you like to live in another country in the future?', 'Is it better to travel alone or with friends?', 'How has travelling changed in the last few years?'],
+    'Money': ['Do you think money brings happiness?', 'Is it important for young people to save money? Why?', 'What do you usually spend your money on?', 'Would you prefer a well-paid boring job or a badly-paid interesting job?', 'Should children get pocket money?', 'Do you prefer paying by card or in cash? Why?', 'What would you do if you won a lot of money?'],
+    'Fashion': ['Do you follow fashion? Why or why not?', 'Are expensive clothes always better quality?', 'What clothes do you feel most comfortable in?', 'Should students wear a school uniform?', 'How has fashion changed since your parents were young?', 'Do you think people judge others by their clothes?', 'Do you prefer shopping online or in shops? Why?'],
+    'Rules and regulations': ['What rules did you have at school? Did you agree with them?', 'Which rule in your town or country would you like to change?', 'Should mobile phones be banned at school or at work?', 'Why do we need rules in society?', 'What should happen when people break the rules?', 'Have you ever broken a rule? What happened?', 'Were rules at home stricter in the past than now?'],
+    'Health and fitness': ['What do you do to stay healthy?', 'Do people today eat better or worse than in the past?', 'How much exercise do you do every week?', 'Is it difficult to have a healthy lifestyle when you work or study a lot?', 'What is your favourite sport? Why?', 'Should fast food be more expensive?', 'What advice would you give someone who wants to get fit?'],
+    'Learning a foreign language': ['Why are you learning English?', 'What is the most difficult thing about learning English?', 'What is the best way to learn a language, in your opinion?', 'Have you ever used English when you were travelling?', 'Which other language would you like to learn? Why?', 'Should everybody learn a foreign language at school?', 'Will English still be important in twenty years?']
+};
+const L1 = [
+    { t: 'Ants', a: 10637, k: 10638, s: 'ants', qa: [['How many kinds of ant are there?','(More than) 12,000'],['Where are there no ants?','At the South Pole'],['How long have ants lived on Earth?','Since (there were) dinosaurs'],['What do ants do with their second stomach?','(Use it) to feed other ants'],['How many times do ants sleep every day?','150'],['Why does the queen ant live much longer than other ants?','Because she sleeps so much']] },
+    { t: 'Chickens', a: 10639, k: 10640, s: 'chickens', qa: [['About how many billion chickens are there in the world?','25'],['Which animal from the past is similar to a chicken?','A (very big) dinosaur'],['How much water do chickens need to drink every day to produce good eggs?','Half a litre'],["What will a chicken do with another bird's eggs?",'It will look after the eggs'],['What colour eggs do some chickens produce?','Blue'],['Why do some people keep chickens?','Because (they believe) they bring good luck']] },
+    { t: 'Festivals', a: 10641, k: 10642, s: 'a festival', qa: [['What sort of festival is the Brighton Festival?','A festival of the arts'],['How long has there been an arts festival in Brighton?','(Since) 1967'],['Why did the Brighton Festival first start?','So more people could enjoy theatre'],['How does the Brighton Festival begin today?',"With a children's day"],["How many children take part in the children's day?",'(About) 5,000'],['How long does the festival last for?','A month']] },
+    { t: 'Mangoes', a: 9878, k: 9860, s: 'mangoes', qa: [['What is the mango called in some parts of the world?','The king of fruits'],['How high can mango trees grow?','(Up to) 40 metres'],['How long do mangoes take to become ripe?','(Up to) 6 months'],["How many of the world's mangoes grow in India?",'(About) half'],['Why does India export so few of their mangoes?','Because Indians eat most of them'],['What does it mean if you give someone a basket of mangoes?',"(It's a sign of) friendship"]] },
+    { t: 'Squirrels', a: 9868, k: 9861, s: 'squirrels', qa: [['Where do squirrels make their homes?','In (very) high places'],['How big are baby squirrels at birth?','2 centimetres long'],['What do young squirrels do in the day time?','They look for food'],['Why do young squirrels return home at night time?','Because they feel safe (there)'],['How do we know that squirrels are intelligent?','Because they hide food (underground) for the winter'],["What is special about squirrels' front teeth?",'They never stop growing']] },
+    { t: 'Basketball', a: 7629, k: 7628, s: 'basketball', qa: [['What job did James Naismith do?','(Sports) teacher'],['How many players were on the first basketball teams?','Nine'],['What did the students throw the balls into?','(Fruit) baskets'],['What happened in 1893?','Colleges started playing'],['How many teams were in the first league?','Six'],['Where was the first international basketball match?','Russia']] },
+    { t: 'Burlington Arcade', a: 7631, k: 7630, s: 'a famous shopping arcade in London', qa: [['What can you buy in the Burlington Arcade?','Expensive things / shoes / jewellery'],['When was the Burlington Arcade built?','1819'],['Why did the rich man build the Burlington Arcade?','People were throwing rubbish into his garden'],['What is one of the rules of the arcade?',"You can't carry large objects / play an instrument / run / sing / open an umbrella"],['What happens if you break a rule in the Burlington Arcade?','You have to go outside'],['How many people visit the Burlington Arcade every year?','Four million']] },
+    { t: 'Crane flies', a: 8210, k: 8225, s: 'crane flies', qa: [['What do crane flies look like?','Mosquitoes / they have long legs'],['How many species of crane fly are there in the world?','(Over) 14,000'],['When do adult crane flies hatch?','September'],['For how long do adult crane flies live?','(About) two weeks'],['Which animals eat crane flies?','Spiders / birds'],['What do young crane flies eat?','(Dead) plants']] },
+    { t: 'Dolphins', a: 8211, k: 8226, s: 'dolphins', qa: [['Where do dolphins live apart from the sea?','Rivers'],['How long can dolphins stay under the water for?','15 minutes'],['How do dolphins recognise each other?','A special sound'],["Where does the mother take the baby when it's born?",'To the surface (to breathe)'],['For how long do young dolphins stay with their mothers?','(At least) three years'],['How high can dolphins jump?','Six metres']] },
+    { t: 'Henri Matisse', a: 8212, k: 8227, s: 'a famous artist', qa: [['Where was Matisse born?','France'],['Where did Matisse work when he started drawing lessons?','A law office'],['How old was Matisse when he started painting?','21'],['Where did Matisse move to in 1891?','Paris'],['What kind of art was he interested in?','Art from Japan'],['In what year did he move to the south of France?','1904']] }
+];
+const L2 = [
+    { t: 'Ed Stafford', a: 10643, k: 10644, s: 'a British man called Ed Stafford', g: 'The first man to walk along the Amazon River.', f: [['He was the first person to walk (all the way along) the Amazon River.','What was Ed Stafford the first person to do?'],['He started his journey in Peru.','Where did he start his journey?'],['He started his journey with his best friend.','Who did he start his journey with?'],['His friend walked with him for 3 months.','How long did his friend walk with him for?'],['The walk started in 2008.','When did the walk start?'],['The journey took 860 days.','How long did his walk take?'],['When he finished, he slept for 4 days.','What did he do when he finished the journey?'],['The hardest part was getting lost (in the rainforest).','What was the hardest part of the journey?'],['His favourite part was meeting (local) people.','What was his favourite part of the adventure?'],['He made a video diary on the journey.','What did he make on the journey?'],['He made it so he could teach people (about the Amazon).','Why did he make a video diary?'],['Now he gives talks about his experience.','What does Ed Stafford do now?']] },
+    { t: 'Ellen MacArthur', a: 10645, k: 10646, s: 'a woman called Ellen MacArthur', g: 'A sportswoman / sailor who sailed alone around the world.', f: [['Ellen first went sailing when she was a little girl.','When did Ellen first go sailing?'],['In the boat Ellen felt free.','How did Ellen feel in the boat?'],['When she was 24, she sailed around the world.','What did Ellen do when she was 24?'],['She had to cross the Southern Ocean.','Which ocean did she have to cross?'],['In the Southern Ocean the waves are huge.','What are the waves like in the Southern Ocean?'],['In the Southern Ocean there are (terrible) storms.','What is the weather like in the Southern Ocean?'],['It is impossible to get help in the middle of the Southern Ocean.','What is it impossible to do in the middle of the Southern Ocean?'],['The nearest land is over 3,000 kilometres away.','How far is the nearest land to the middle of the Southern Ocean?'],['When she was 28, she sailed around the world for the second time.','When did Ellen sail around the world for the second time?'],['She completed the journey in 72 days.','How many days did it take her to complete the journey?'],['She became the fastest person to sail around the world.','What was special about her second journey?']] },
+    { t: 'Fiji', a: 10647, k: 10648, s: 'a place', g: 'A country called Fiji.', f: [['There are 333 (small) islands.','How many islands are there in Fiji?'],['It has a population of (just under) 1 million people.','What is the population of Fiji?'],['Most people live on the coast.','Where do most people live?'],['There are 3 (main) languages.','How many main languages are there?'],['(Almost) everyone can speak English.','Which language can almost everyone speak?'],['Tourism is the most important activity.','How do people make a living?'],['People love the beaches because they are quiet.','Why do people love the beaches in Fiji?'],['Most of the tourists come from Australia.','Where do most of the tourists come from?'],['Many food dishes include fish.','What do many of the food dishes include?'],['The national drink comes from the pepper plant.','Which plant does the national drink come from?'],['The most popular sport is rugby.','What is the most popular sport?'],['More people have started playing football (recently).','What sport have more people started playing recently?']] },
+    { t: 'An unusual job', a: 9874, k: 9858, s: 'a woman called Mary Jones, who has an unusual job', g: '(Women) truck drivers.', f: [["Only 10% of Britain's truck drivers are women.","What percentage of Britain's truck drivers are women?"],['Transport companies want to employ more women.','What do transport companies want to do?'],["They don't have enough drivers.",'Why do transport companies want to employ more women?'],['Mary Jones is 22 years old.','How old is Mary Jones?'],['Mary was a hairdresser.',"What was Mary's job before she was a truck driver?"],['Mary delivers food (to supermarkets).','What does Mary deliver?'],['Mary sometimes works up to 14 hours a day.','How many hours does Mary sometimes work in a day?'],['Mary prefers driving to hairdressing.','Which job does Mary prefer?'],['She likes travelling.','Why does Mary prefer truck driving to hairdressing?'],['Her main problem is that she misses her family (on long trips).','What is the main problem Mary has with her job?'],['To become a truck driver, you have to be over 18.','How old do you have to be to become a truck driver?'],['You need to have a driving licence.','What do you need to have to become a truck driver?']] },
+    { t: 'Bhutan', a: 9875, k: 9859, s: 'a place in Asia', g: 'Bhutan.', f: [['Only (about) 800,000 people live in Bhutan.','How many people live in Bhutan?'],['The people of Bhutan speak 24 different languages.','How many languages do the people of Bhutan speak?'],['About 72% of Bhutan is forest.','How much of Bhutan is forest?'],['The government has made (a lot of) laws to protect animals.','What has the government done to protect animals?'],['People are not allowed to use plastic bags.','What kind of bags are not allowed in Bhutan?'],['Many of the cars are electric.','What is special about the cars in Bhutan?'],["The capital doesn't have any traffic lights.",'What is unusual about the capital of Bhutan?'],['Policemen show drivers when to stop.','Who shows drivers when to stop?'],['The policemen wear (special) white gloves.','What do the policemen wear?'],['You can see people wearing traditional dress.','What can you see people wearing in Bhutan?'],['Every year, the government asks people about their happiness.','What does the government ask its people about every year?'],['They think happiness is more important than money.','Why does the government want to find out how happy people are?']] },
+    { t: 'Tigers', a: 7633, k: 7632, s: 'animals', g: 'Tigers.', f: [['A full-grown tiger can weigh 363 kilograms.','How heavy is a full-grown tiger?'],['Their tail can be up to one metre long.',"How long can a tiger's tail be?"],['Tigers hunt alone.','How do tigers usually hunt?'],['They wait until dark to hunt.','At what time of day do tigers hunt?'],['They can see six times better than humans in the dark.','How well can they see in the dark?'],['They eat five kilograms of meat in a meal.','How much meat do they eat in a meal?'],["They cover meat with leaves or dirt and come back later to finish it.","What do they do with meat they haven't finished eating?"],['They enjoy water and are good swimmers.','How are tigers different from other cats?'],['You can identify a tiger from its stripes.','How can you identify a tiger?'],['Each tiger has a different pattern of stripes.','Do all tigers look the same?'],['You can hear a tiger from three kilometres away.','How far away can you hear a tiger roar?']] },
+    { t: 'First colour film', a: 7637, k: 7636, s: 'history', g: 'The first colour film and how it was made.', f: [['Some silent films were made in colour.','Were all silent films in black and white?'],['One of the most popular films was A Trip to the Moon.','Was A Trip to the Moon a successful film?'],['It was made in France.','Where was A Trip to the Moon made?'],['It was made in 1902.','When was A Trip to the Moon made?'],['It is about people flying to the moon (and meeting insects there).','What is A Trip to the Moon about?'],['Most films at the time were black and white.','What were films usually like at the time?'],['It was made into colour in Paris.','Where was the film made into a colour film?'],['It was painted with paints and brushes.','How was the film made into a colour film?'],['It took 200 people to paint it.','How many people painted the film?'],['It was found in 1993.','When was the film found?'],['You can now see it in a museum in Spain.','Where can you see the film now?']] },
+    { t: 'Coober Pedy', a: 8213, k: 8228, s: 'geography', g: 'A (mining) town in Australia.', f: [["It's in South Australia.",'Where is the town?'],['About 3,000 people live there.','How many people live in the town?'],['It is a hot, dusty place in the desert.','What sort of place is it?'],['Most people went to live there to look for jewels.','Why did most people go to live there?'],['The first jewels were found in 1915.','When were the first jewels found in the town?'],['Most people live in underground homes.','What kind of homes do people live in?'],['The town is a very long way from any other towns.','Is the town near any other towns?'],['The football team travels about 900 kilometres to play a game.',"How far does the town's football team have to travel to play a match?"],['Very little rain falls.','Why are there no trees or plants?'],['Summer temperatures are very high; it is cooler between March and November.',"What's the weather like in the town?"],['Most tourists visit between March and November.','When do most tourists visit?'],['They have found a lot of oil under the town.','Why will the town completely change soon?']] },
+    { t: 'Garry Kasparov', a: 8214, k: 8229, s: 'a famous person', g: 'A chess player — Garry Kasparov.', f: [['People say he was the best chess player ever.','What do people say about Garry Kasparov?'],['He was born in 1963.','When was Garry Kasparov born?'],['He started playing chess at five years old.','How old was he when he started playing chess?'],['In 1984 he became the youngest person to be the best in the world.','What happened in 1984?'],['He stayed number one for 19 years.','How long was he the number one chess player?'],['He played chess against a computer.','What is Garry Kasparov most famous for?'],['The computer was called Deep Blue.','What was the computer called?'],['The designers thought no one could beat it.','What did the designers think about the computer?'],['Kasparov won four games against Deep Blue.','How many games did he win against the computer?'],['Deep Blue won two games.','How many games did the computer win?'],['He stopped playing in competitions in 2005.','When did he stop playing chess in competitions?'],['He still teaches and plays for fun.','What does Garry Kasparov do now?']] },
+    { t: 'Winter Olympics', a: 8215, k: 8230, s: 'history', g: 'The Winter Olympics.', f: [['The first Winter Olympics was in France in 1924.','When and where was the first Winter Olympics?'],['16 countries took part.','How many countries were in the first Winter Olympics?'],['88 countries took part in the 2014 Russian games.','How many countries were in the Russian Winter Olympics?'],['Thailand, Brazil and Kenya have warm climates but sent teams.','Why is it surprising that Thailand, Brazil and Kenya sent teams?'],['Winter weather causes problems: not enough snow in Austria, too much in Japan.','What happened in Austria and Japan?'],['The Russian organisers were worried because it can be warm.','Why were the Russian organisers worried?'],['Snow machines worked all day and night making new snow.','How long did the snow machines work?'],['Norway has won the most medals.','Which country has won the most gold medals?'],['Anders Haugen was the oldest winner (a ski jumper).','Who was Anders Haugen?'],['There was a mistake with his result.',"Why didn't Anders Haugen get a medal?"],['They found the error 50 years later.','When did they find the error?'],['He was 83 when he got his medal.','How old was he when he got his medal?']] }
+];
+
+// ===================== UI HELPERS =====================
+function showPart(n) {
+    document.querySelectorAll('.part').forEach(p => p.classList.add('hidden'));
+    document.getElementById('part-' + n).classList.remove('hidden');
+    document.querySelectorAll('.part-tab').forEach(b => {
+        b.className = 'part-tab py-3 px-2 font-bold text-sm rounded-md cursor-pointer ' + (b.id === 'tab-' + n ? 'bg-indigo-600 text-white shadow' : 'bg-gray-200 text-gray-700 hover:bg-gray-300');
+    });
+    stopAudio();
+}
+function toggle(id) { document.getElementById(id).classList.toggle('hidden'); }
+function shuffle(a) { return a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(x => x[1]); }
+function esc(s) { return s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+let voice = null;
+function pickVoice() {
+    const vs = speechSynthesis.getVoices();
+    voice = vs.find(v => v.lang === 'en-GB') || vs.find(v => v.lang && v.lang.startsWith('en')) || null;
+}
+if ('speechSynthesis' in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+function say(text) {
+    if (!('speechSynthesis' in window)) { alert(text); return; }
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-GB'; u.rate = 0.9; if (voice) u.voice = voice;
+    speechSynthesis.speak(u);
+}
+function questionRow(q, n) {
+    return `<div class="flex items-start gap-2 p-2 border rounded bg-slate-50">
+        <button onclick="say(this.dataset.q); this.nextElementSibling.classList.remove('hidden')" data-q="${esc(q)}" class="shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm px-3 py-1.5 rounded cursor-pointer">🔊 Pregunta ${n}</button>
+        <span class="hidden text-sm pt-1">${esc(q)}</span>
+    </div>`;
+}
+
+// ===================== AUDIO PLAYER =====================
+const player = document.getElementById('player');
+let playToken = 0;
+function stopAudio() { playToken++; player.pause(); }
+function playOnce(src, statusEl, label) {
+    return new Promise((resolve, reject) => {
+        const token = playToken;
+        player.src = src; player.currentTime = 0;
+        statusEl.innerText = '🔈 ' + label + ' (cargando…)';
+        player.onplaying = () => { statusEl.innerText = '🔈 ' + label; };
+        player.onended = () => token === playToken ? resolve() : reject();
+        player.onerror = () => { statusEl.innerText = '❌ No se pudo cargar el audio. Comprueba tu conexión.'; reject(); };
+        player.play().catch(() => { statusEl.innerText = '❌ El navegador bloqueó el audio. Vuelve a pulsar el botón.'; reject(); });
+    });
+}
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+// ===================== PARTE 1 =====================
+let topicPool = [];
+function saveTopic() {}
+function topicQuestion() {
+    const t = document.getElementById('tf-title').value.trim();
+    if (!t) { alert('Escribe primero el título de tu Topic Form.'); return; }
+    if (!topicPool.length) topicPool = shuffle(TOPIC_QS.slice());
+    const points = [1, 2, 3, 4].map(i => document.getElementById('tf-' + i).value.trim()).filter(Boolean);
+    let q = topicPool.pop().replace('{t}', t.replace(/^my\s+/i, 'your '));
+    if (points.length && Math.random() < 0.4) {
+        const p = points[Math.floor(Math.random() * points.length)];
+        q = `You wrote "${p}" on your topic form. Can you tell me more about that?`;
+    }
+    document.getElementById('tq-text').innerText = q;
+    say(q);
+}
+function downloadTopicForm() {
+    const t = document.getElementById('tf-title').value.trim();
+    if (!t) { alert('Escribe primero el título de tu tema.'); return; }
+    const pts = [1, 2, 3, 4].map(i => `${i}. ${document.getElementById('tf-' + i).value.trim() || '...'}`).join('\n');
+    const txt = `TRINITY ISE I — TOPIC FORM\n==========================\nCandidate: ${fullName() || '...'}\n\nTitle of topic: ${t}\n\nMain points to discuss about my topic:\n${pts}\n`;
+    download(new Blob([txt], { type: 'text/plain;charset=utf-8' }), `Topic-Form-${fileSafe(fullName() || 'alumno')}.txt`);
+}
+
+// ===================== PARTE 2 =====================
+function initConv() {
+    const sel = document.getElementById('conv-select');
+    Object.keys(CONV).forEach(k => sel.insertAdjacentHTML('beforeend', `<option value="${k}">${k}</option>`));
+}
+function randomConvTopic() {
+    const keys = Object.keys(CONV); const k = keys[Math.floor(Math.random() * keys.length)];
+    document.getElementById('conv-select').value = k; setConvTopic(k);
+    say(`Now we'll move on to the conversation task. Let's talk about ${k.toLowerCase()}.`);
+}
+function setConvTopic(k) {
+    if (!k) return;
+    document.getElementById('conv-box').classList.remove('hidden');
+    document.getElementById('conv-title').innerText = '🗂️ Topic: ' + k;
+    document.getElementById('conv-questions').innerHTML = shuffle(CONV[k].slice()).slice(0, 5).map((q, i) => questionRow(q, i + 1)).join('');
+}
+
+// ===================== PARTE 3 =====================
+let curL1 = null;
+function initL1() {
+    const sel = document.getElementById('l1-select');
+    L1.forEach((x, i) => sel.insertAdjacentHTML('beforeend', `<option value="${i}">${x.t}</option>`));
+}
+function setL1(i) {
+    stopAudio(); if (i === '') return;
+    curL1 = L1[i];
+    document.getElementById('l1-box').classList.remove('hidden');
+    document.getElementById('l1-status').innerText = '';
+    document.getElementById('l1-rubric').innerText = `Examiner: "You're going to hear a short talk about ${curL1.s}. You will hear the talk twice. As you listen, write down some notes about what you hear, if you want to. Then, I will ask you six questions."`;
+    document.getElementById('l1-questions').innerHTML = curL1.qa.map((x, n) => questionRow(x[0], n + 1)).join('');
+    document.getElementById('l1-answers').classList.add('hidden');
+    document.getElementById('l1-answers').innerHTML = curL1.qa.map((x, n) => `<p><strong>${n + 1}.</strong> ${esc(x[0])} → <span class="text-emerald-700 font-bold">${esc(x[1])}</span></p>`).join('') +
+        `<p class="text-xs text-gray-500 pt-2">Fuente: <a class="underline" target="_blank" href="https://www.trinitycollege.com/resource/?id=${curL1.k}">rúbrica oficial de Trinity (PDF, incluye la transcripción)</a></p>`;
+}
+async function playL1() {
+    if (!curL1) return;
+    stopAudio(); const st = document.getElementById('l1-status');
+    try {
+        await playOnce(TRINITY(curL1.a), st, 'Reproducción 1 de 2');
+        st.innerText = '⏸️ Pausa breve…'; await wait(4000);
+        await playOnce(TRINITY(curL1.a), st, 'Reproducción 2 de 2');
+        st.innerText = '✅ Terminado. Ahora contesta las 6 preguntas.';
+        say('Now I will ask you six questions. You only need to answer in a few words.');
+    } catch (e) {}
+}
+
+// ===================== PARTE 4 =====================
+let curL2 = null;
+function initL2() {
+    const sel = document.getElementById('l2-select');
+    L2.forEach((x, i) => sel.insertAdjacentHTML('beforeend', `<option value="${i}">${x.t}</option>`));
+}
+function setL2(i) {
+    stopAudio(); if (i === '') return;
+    curL2 = L2[i];
+    document.getElementById('l2-box').classList.remove('hidden');
+    document.getElementById('l2-status').innerText = '';
+    document.getElementById('l2-rubric').innerText = `Examiner: "You're going to hear a short talk about ${curL2.s}. You will hear the talk twice. The first time, just listen. Then I'll ask you to tell me in a few words what the speaker is talking about."`;
+    newL2Questions();
+    document.getElementById('l2-answers').classList.add('hidden');
+    document.getElementById('l2-answers').innerHTML = `<p><strong>What the talk is about:</strong> <span class="text-emerald-700 font-bold">${esc(curL2.g)}</span></p><p class="font-bold pt-2">Facts from the recording (con 6 basta):</p>` +
+        curL2.f.map((x, n) => `<p>${n + 1}. ${esc(x[0])}</p>`).join('') +
+        `<p class="text-xs text-gray-500 pt-2">Fuente: <a class="underline" target="_blank" href="https://www.trinitycollege.com/resource/?id=${curL2.k}">rúbrica oficial de Trinity (PDF, incluye la transcripción)</a></p>`;
+}
+function newL2Questions() {
+    if (!curL2) return;
+    document.getElementById('l2-questions').innerHTML = shuffle(curL2.f.slice()).slice(0, 4).map((x, n) => questionRow(x[1], n + 1)).join('');
+}
+async function playL2(n) {
+    if (!curL2) return;
+    stopAudio(); const st = document.getElementById('l2-status');
+    try {
+        await playOnce(TRINITY(curL2.a), st, n === 1 ? 'Primera escucha' : 'Segunda escucha');
+        if (n === 1) { st.innerText = '✅ Ahora di de qué trata la charla.'; say('Now tell me in a few words what the talk is about.'); }
+        else { st.innerText = '✅ Ahora di seis datos de la charla.'; say('Now tell me six pieces of information about the talk.'); }
+    } catch (e) {}
+}
+
+// ===================== RECORDER =====================
+function fullName() {
+    return [document.getElementById('st-name').value.trim(), document.getElementById('st-surname').value.trim()].filter(Boolean).join(' ');
+}
+function fileSafe(s) { return s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+function titleFor(part) {
+    const n = fileSafe(document.getElementById('st-name').value.trim()) || 'Nombre';
+    const s = fileSafe(document.getElementById('st-surname').value.trim()) || 'Apellido';
+    return `Speaking-Parte${part}-${n}-${s}`;
+}
+function updateTitles() { [1, 2, 3, 4].forEach(p => { const el = document.getElementById('title-' + p); if (el) el.innerText = titleFor(p); }); }
+function download(blob, name) {
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+}
+
+const REC = {};
+function buildRecorder(part) {
+    const wa = WHATSAPP_NUMBER ? `<a id="wa-${part}" target="_blank" class="bg-green-600 hover:bg-green-700 text-white font-bold px-3 py-2 rounded text-sm">💬 Abrir WhatsApp</a>` : '';
+    document.getElementById('rec-' + part).innerHTML = `
+    <div class="border-2 border-rose-200 bg-rose-50 rounded-lg p-4 space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+            <p class="font-bold text-rose-900">🎙️ Grabador — Parte ${part}</p>
+            <p class="text-xs">Título: <span id="title-${part}" class="font-mono font-bold bg-white px-1.5 py-0.5 rounded border">${titleFor(part)}</span></p>
+        </div>
+        <div class="flex flex-wrap gap-2 items-center">
+            <button id="rb-start-${part}" onclick="recStart(${part})" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-4 py-2 rounded text-sm cursor-pointer">⏺ Grabar</button>
+            <button id="rb-pause-${part}" onclick="recPause(${part})" disabled class="bg-white border font-bold px-3 py-2 rounded text-sm cursor-pointer disabled:opacity-40">⏸ Pausar</button>
+            <button id="rb-stop-${part}" onclick="recStop(${part})" disabled class="bg-white border font-bold px-3 py-2 rounded text-sm cursor-pointer disabled:opacity-40">⏹ Terminar</button>
+            <span id="rb-time-${part}" class="font-mono font-bold text-rose-800">00:00</span>
+            <span id="rb-dot-${part}" class="hidden rec-dot text-rose-600 font-bold text-sm">● REC</span>
+        </div>
+        <div id="rb-result-${part}" class="hidden space-y-2">
+            <audio id="rb-audio-${part}" controls class="w-full"></audio>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="recShare(${part})" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded text-sm cursor-pointer">📤 Compartir (WhatsApp)</button>
+                <button onclick="recDownload(${part})" class="bg-slate-700 hover:bg-slate-800 text-white font-bold px-3 py-2 rounded text-sm cursor-pointer">💾 Descargar</button>
+                ${wa}
+            </div>
+        </div>
+        <button onclick="copyTitle(${part})" class="text-xs underline text-rose-800 cursor-pointer">📋 Copiar título (para la opción B: nota de voz de WhatsApp)</button>
+    </div>`;
+}
+function checkNames() {
+    if (!document.getElementById('st-name').value.trim() || !document.getElementById('st-surname').value.trim()) {
+        alert('Escribe tu nombre y tu apellido arriba antes de grabar. Así el archivo saldrá con el título correcto.');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return false;
+    }
+    return true;
+}
+async function recStart(part) {
+    if (!checkNames()) return;
+    if (!navigator.mediaDevices || !window.MediaRecorder) { alert('Tu navegador no permite grabar. Usa la opción B: nota de voz de WhatsApp.'); return; }
+    let stream;
+    try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); }
+    catch (e) { alert('No se pudo acceder al micrófono. Revisa los permisos del navegador o usa la opción B (nota de voz de WhatsApp).'); return; }
+    const mime = ['audio/mp4', 'audio/webm;codecs=opus', 'audio/webm', 'audio/ogg'].find(t => MediaRecorder.isTypeSupported(t)) || '';
+    const r = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
+    const st = REC[part] = { r, stream, chunks: [], secs: 0, timer: null, blob: null };
+    r.ondataavailable = e => e.data.size && st.chunks.push(e.data);
+    r.onstop = () => {
+        st.stream.getTracks().forEach(t => t.stop());
+        st.blob = new Blob(st.chunks, { type: r.mimeType || mime || 'audio/webm' });
+        const au = document.getElementById('rb-audio-' + part); au.src = URL.createObjectURL(st.blob);
+        document.getElementById('rb-result-' + part).classList.remove('hidden');
+        if (WHATSAPP_NUMBER) document.getElementById('wa-' + part).href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(titleFor(part))}`;
+    };
+    r.start(1000);
+    st.timer = setInterval(() => { if (r.state === 'recording') { st.secs++; document.getElementById('rb-time-' + part).innerText = String(Math.floor(st.secs / 60)).padStart(2, '0') + ':' + String(st.secs % 60).padStart(2, '0'); } }, 1000);
+    setRecUI(part, 'recording');
+    document.getElementById('rb-result-' + part).classList.add('hidden');
+    document.getElementById('rb-time-' + part).innerText = '00:00';
+}
+function recPause(part) {
+    const st = REC[part]; if (!st) return;
+    if (st.r.state === 'recording') { st.r.pause(); setRecUI(part, 'paused'); }
+    else if (st.r.state === 'paused') { st.r.resume(); setRecUI(part, 'recording'); }
+}
+function recStop(part) {
+    const st = REC[part]; if (!st) return;
+    clearInterval(st.timer); st.r.stop(); setRecUI(part, 'idle');
+}
+function setRecUI(part, state) {
+    document.getElementById('rb-start-' + part).disabled = state !== 'idle';
+    document.getElementById('rb-pause-' + part).disabled = state === 'idle';
+    document.getElementById('rb-stop-' + part).disabled = state === 'idle';
+    document.getElementById('rb-pause-' + part).innerText = state === 'paused' ? '▶ Reanudar' : '⏸ Pausar';
+    document.getElementById('rb-dot-' + part).classList.toggle('hidden', state !== 'recording');
+}
+function recExt(blob) { return blob.type.includes('mp4') ? 'm4a' : blob.type.includes('ogg') ? 'ogg' : 'webm'; }
+function recFile(part) { const b = REC[part].blob; return new File([b], `${titleFor(part)}.${recExt(b)}`, { type: b.type }); }
+async function recShare(part) {
+    const f = recFile(part);
+    if (navigator.canShare && navigator.canShare({ files: [f] })) {
+        try { await navigator.share({ files: [f], title: titleFor(part) }); } catch (e) {}
+    } else {
+        recDownload(part);
+        alert('Tu navegador no permite compartir directamente. El audio se ha descargado: adjúntalo en WhatsApp (WhatsApp Web o en el móvil) como documento.');
+    }
+}
+function recDownload(part) { const f = recFile(part); download(f, f.name); }
+async function copyTitle(part) {
+    const t = titleFor(part);
+    try { await navigator.clipboard.writeText(t); alert('Título copiado: ' + t); } catch (e) { prompt('Copia este título:', t); }
+}
+
+// ===================== INIT =====================
+initConv(); initL1(); initL2();
+[1, 2, 3, 4].forEach(buildRecorder);
+showPart(1);
+</script>
+</body>
+</html>
