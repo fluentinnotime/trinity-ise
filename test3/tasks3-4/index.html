@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE I - Test 3 - Writing Tasks 3 & 4 Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .word-count-badge { transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 min-h-screen p-4 md:p-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden p-6 border border-gray-100">
+        <div class="text-center border-b border-gray-200 pb-4 mb-6">
+            <h1 class="text-3xl font-bold text-indigo-600">Succeed in TRINITY ISE I</h1>
+            <p class="text-gray-500 font-medium mt-1">Test 3 - Task 3 & 4: Interactive Writing Panel</p>
+        </div>
+
+        <div class="bg-indigo-50 rounded-xl p-4 mb-6 border border-indigo-100 space-y-3 shadow-sm">
+            <div class="flex items-center space-x-2">
+                <span class="text-xl">⚙️</span>
+                <h3 class="text-indigo-900 font-bold text-base uppercase tracking-wider">Información de Entrega</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                <div>
+                    <label class="block text-indigo-900 font-semibold mb-1">Email del Profesor:</label>
+                    <input type="email" value="franciscodecio@gmail.com" disabled class="w-full p-2 border rounded bg-slate-100 font-bold text-indigo-700 outline-none select-none">
+                </div>
+                <div>
+                    <label class="block text-indigo-900 font-semibold mb-1">Nombre del Alumno:</label>
+                    <input type="text" id="student-name" placeholder="Ej. Juan Pérez" class="w-full p-2 border rounded bg-white font-medium focus:ring-2 focus:ring-indigo-400 outline-none">
+                </div>
+                <div>
+                    <label class="block text-indigo-900 font-semibold mb-1">Tu Email (Alumno):</label>
+                    <input type="email" id="student-email" placeholder="Ej. tu-correo@gmail.com" class="w-full p-2 border rounded bg-white font-medium focus:ring-2 focus:ring-indigo-400 outline-none">
+                </div>
+            </div>
+            <div class="text-[12px] text-indigo-800 font-medium leading-relaxed bg-white/70 p-3 rounded border border-indigo-100">
+                🚀 <strong>¿Cómo entregar el ejercicio?:</strong> Escribe tus notas y tu redacción en los cuadros de abajo. Cuando termines, haz clic en el botón azul <strong>"Descargar Archivo para Enviar"</strong>. Se guardará un archivo de texto en tu dispositivo. Luego, abre tu correo (Gmail, Hotmail, etc.), adjunta ese archivo y envíalo a: <span class="bg-indigo-100 text-indigo-900 px-1.5 py-0.5 rounded font-bold">franciscodecio@gmail.com</span>
+            </div>
+        </div>
+
+        <div class="flex space-x-2 mb-6 border-b border-gray-200 pb-2 overflow-x-auto">
+            <button onclick="switchTab('task3-tab')" id="btn-task3-tab" class="px-4 py-2.5 font-bold text-sm rounded-t-lg bg-indigo-600 text-white cursor-pointer whitespace-nowrap">
+                📝 Task 3: Reading into writing
+            </button>
+            <button onclick="switchTab('task4-tab')" id="btn-task4-tab" class="px-4 py-2.5 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap">
+                ✍️ Task 4: Extended writing
+            </button>
+        </div>
+
+        <!-- TASK 3 -->
+        <div id="task3-tab" class="tab-content block space-y-4">
+            <div class="bg-amber-50/60 border-l-4 border-amber-500 p-4 rounded-r-lg space-y-1 text-sm">
+                <h3 class="font-bold text-amber-900 text-base">Task 3 — Reading into writing</h3>
+                <p class="text-gray-700 italic">"Write an <strong>essay</strong> for your school magazine (100-130 words) about why everyone should learn a foreign language. Use the information you read in Task 2 to:"</p>
+                <ul class="list-disc pl-5 text-gray-700 font-medium text-xs space-y-0.5 pt-1">
+                    <li>recommend ways of learning a foreign language</li>
+                    <li>explain how studying a foreign language can improve school performance</li>
+                    <li>explain why a foreign language will be useful in the future.</li>
+                </ul>
+            </div>
+
+            <details class="bg-sky-50 border border-sky-200 rounded-lg p-3 text-sm">
+                <summary class="font-bold text-sky-900 cursor-pointer">📖 Ver los textos de la Task 2 (en el examen puedes consultarlos)</summary>
+                <div class="space-y-3 mt-3 leading-relaxed">
+                    <div><p class="font-bold text-indigo-700">Text A — What is the best way to learn a foreign language?</p>
+                        <p><strong>Diego, Argentina:</strong> For me the best way is by going to language-learning websites on the Internet. Some of them are really interesting. It's also cheap and easy.</p>
+                        <p><strong>Kirsten, Sweden:</strong> I think watching English films with Swedish subtitles is the best. I love films, so my studying is really enjoyable.</p>
+                        <p><strong>Yoko, Japan:</strong> Without doubt, the best way to learn any language is to use it all the time with native speakers. So you should spend time abroad in an English-speaking country.</p></div>
+                    <div><p class="font-bold text-indigo-700">Text B — Language experiment (Vanessa Smith, Class 4B)</p>
+                        <p>Yesterday my class learnt about research at the Clarkson School of Music, in Nottingham University, on the effect of using music when learning a language. They found that using music helps people to remember what they learn.</p>
+                        <p>Today in class we did an experiment to see if music helped us to learn Russian. We chose Russian because nobody in the class could speak it at all. Our teacher, Mr Carter, divided us into three groups, A, B and C. The students in Group A heard spoken Russian phrases on a tape. For Group B, the same phrases were set to a rhythm like a rap, and Group C heard the same phrases sung in a song. All of us tried to remember the phrases, and repeat them fifteen minutes later. We found that Group C were able to remember far more Russian phrases than the other two groups. We therefore concluded that learning a language sung in a song helps you to remember it better.</p></div>
+                    <div><p class="font-bold text-indigo-700">Text C</p>
+                        <p>Scientists have found that learning a second language increases intelligence. There have been many studies which find that people who regularly speak more than one language are better at solving problems. Other experiments show that students who speak a foreign language generally do better at tests than students who only speak one language. This is particularly the case with tests in music, reading and maths.</p>
+                        <p>In a recent experiment, researchers from Cambridge University studied the part of the brain which processes information. They found that being bilingual changed this part of the brain. They compared this change to the way in which muscles change when a person exercises a lot.</p></div>
+                    <div><p class="font-bold text-indigo-700">Text D — Why students choose to learn foreign languages?</p>
+                        <p>43% increase employment opportunities · 24% degree requirement · 13% future travel · 9% personal interest, enjoyment · 6% study abroad · 3% family background · 1% other</p></div>
+                </div>
+            </details>
+
+            <div class="space-y-1.5">
+                <div class="flex justify-between items-center bg-slate-100 p-2 rounded-t-lg border-x border-t">
+                    <span class="text-sm font-bold text-slate-700">📋 Planning notes</span>
+                    <span class="text-[11px] text-slate-500 italic">(No marks are given for these planning notes)</span>
+                </div>
+                <textarea id="task3-planning" placeholder="Write your ideas or bullet points here..." class="w-full h-24 p-3 border rounded-b-lg resize-none outline-none focus:border-indigo-400 bg-slate-50 text-sm font-medium"></textarea>
+            </div>
+            <div class="space-y-1.5">
+                <div class="flex justify-between items-center bg-indigo-50 p-2 rounded-t-lg border-x border-t border-indigo-100">
+                    <span class="text-sm font-bold text-indigo-900">✍️ Final Essay (Target: 100 - 130 words)</span>
+                    <div id="task3-word-badge" class="word-count-badge text-xs font-bold px-2 py-0.5 rounded bg-red-100 text-red-700">Words: <span id="task3-count">0</span></div>
+                </div>
+                <textarea id="task3-text" oninput="updateWordCount('task3')" placeholder="Now write your essay here. Try to use your own words as far as possible..." class="w-full h-64 p-4 border rounded-b-lg outline-none focus:border-indigo-500 text-sm leading-relaxed" style="font-family: monospace;"></textarea>
+            </div>
+            <p class="text-xs text-slate-500 italic bg-slate-50 p-2 rounded border">
+                ⚠️ <strong>Check window:</strong> When you have finished your essay, spend 2-3 minutes reading through what you have written. Make sure you have covered all three bullet points. Remember to check how you made use of the reading texts, as well as checking the language and organisation of your writing.
+            </p>
+            <div class="pt-2 flex justify-end">
+                <button onclick="downloadTextFile('task3')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-lg shadow-md cursor-pointer transition">💾 Descargar Archivo para Enviar (Task 3)</button>
+            </div>
+        </div>
+
+        <!-- TASK 4 -->
+        <div id="task4-tab" class="tab-content hidden space-y-4">
+            <div class="bg-teal-50 border-l-4 border-teal-500 p-4 rounded-r-lg space-y-1 text-sm">
+                <h3 class="font-bold text-teal-900 text-base">Task 4 — Extended writing</h3>
+                <p class="text-gray-700 italic">"You recently came back from holidays. Write an <strong>e-mail</strong> to your friend (100-130 words) telling him/her about your experience. You should:"</p>
+                <ul class="list-disc pl-5 text-gray-700 font-medium text-xs space-y-0.5 pt-1">
+                    <li>describe where you went, what you did, with whom you travelled, etc.</li>
+                    <li>say whether you enjoyed your trip or not and why.</li>
+                </ul>
+            </div>
+            <div class="space-y-1.5">
+                <div class="flex justify-between items-center bg-slate-100 p-2 rounded-t-lg border-x border-t">
+                    <span class="text-sm font-bold text-slate-700">📋 Planning notes</span>
+                    <span class="text-[11px] text-slate-500 italic">(No marks are given for these planning notes)</span>
+                </div>
+                <textarea id="task4-planning" placeholder="Where? Who with? What did you do? Did you enjoy it? Why?" class="w-full h-24 p-3 border rounded-b-lg resize-none outline-none focus:border-indigo-400 bg-slate-50 text-sm font-medium"></textarea>
+            </div>
+            <div class="space-y-1.5">
+                <div class="flex justify-between items-center bg-indigo-50 p-2 rounded-t-lg border-x border-t border-indigo-100">
+                    <span class="text-sm font-bold text-indigo-900">✍️ Final E-mail (Target: 100 - 130 words)</span>
+                    <div id="task4-word-badge" class="word-count-badge text-xs font-bold px-2 py-0.5 rounded bg-red-100 text-red-700">Words: <span id="task4-count">0</span></div>
+                </div>
+                <textarea id="task4-text" oninput="updateWordCount('task4')" placeholder="Hi ...,&#10;&#10;Now write your e-mail of 100-130 words here..." class="w-full h-64 p-4 border rounded-b-lg outline-none focus:border-indigo-500 text-sm leading-relaxed" style="font-family: monospace;"></textarea>
+            </div>
+            <p class="text-xs text-slate-500 italic bg-slate-50 p-2 rounded border">
+                ⚠️ <strong>Check window:</strong> When you have finished your e-mail, spend 2-3 minutes reading through what you have written. Make sure you have covered the two bullet points and remember to check the language and organisation of your writing.
+            </p>
+            <div class="pt-2 flex justify-end">
+                <button onclick="downloadTextFile('task4')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 rounded-lg shadow-md cursor-pointer transition">💾 Descargar Archivo para Enviar (Task 4)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+            ['task3-tab', 'task4-tab'].forEach(id => {
+                document.getElementById('btn-' + id).className = 'px-4 py-2.5 text-sm rounded-t-lg cursor-pointer whitespace-nowrap ' +
+                    (id === tabId ? 'font-bold bg-indigo-600 text-white' : 'font-semibold bg-gray-200 text-gray-700');
+            });
+        }
+        function updateWordCount(prefix) {
+            const count = document.getElementById(prefix + '-text').value.trim().split(/\s+/).filter(Boolean).length;
+            document.getElementById(prefix + '-count').innerText = count;
+            const badge = document.getElementById(prefix + '-word-badge');
+            let cls = 'bg-red-100 text-red-700';
+            if (count >= 100 && count <= 130) cls = 'bg-emerald-100 text-emerald-800 ring-2 ring-emerald-400';
+            else if ((count >= 85 && count < 100) || (count > 130 && count <= 145)) cls = 'bg-amber-100 text-amber-800';
+            badge.className = 'word-count-badge text-xs font-bold px-2 py-0.5 rounded ' + cls;
+        }
+        function downloadTextFile(taskKey) {
+            const studentName = document.getElementById('student-name').value.trim();
+            const studentEmail = document.getElementById('student-email').value.trim();
+            if (!studentName || !studentEmail) {
+                alert("❌ Por favor, escribe tu nombre y tu correo electrónico en las casillas superiores antes de descargar el archivo.");
+                return;
+            }
+            const planningNotes = document.getElementById(taskKey + '-planning').value.trim();
+            const finalWriting = document.getElementById(taskKey + '-text').value.trim();
+            const wordCount = document.getElementById(taskKey + '-count').innerText;
+            if (!finalWriting) {
+                alert("❌ La caja de redacción está vacía. Debes escribir tu texto antes de poder guardarlo.");
+                return;
+            }
+            const taskTitle = taskKey === 'task3' ? "Test 3 - Task 3: Reading into writing (School magazine essay)" : "Test 3 - Task 4: Extended writing (E-mail to a friend)";
+            let c = `TRINITY ISE I - WRITING PRACTICE SUBMISSION\n`;
+            c += `====================================================\n`;
+            c += `STUDENT NAME  : ${studentName}\nSTUDENT EMAIL : ${studentEmail}\nEXAM TASK     : ${taskTitle}\nWORD COUNT    : ${wordCount} words\n`;
+            c += `====================================================\n\n[PART 1: PLANNING NOTES]\n${planningNotes || 'No notes provided.'}\n\n`;
+            c += `----------------------------------------------------\n\n[PART 2: FINAL WRITING TEXT]\n${finalWriting}\n\n`;
+            c += `====================================================\n📩 INSTRUCCIONES: Envía este archivo descargado por email a tu profesor a: franciscodecio@gmail.com`;
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(new Blob([c], { type: 'text/plain;charset=utf-8' }));
+            link.download = `${studentName.toLowerCase().replace(/[^a-z0-9]/gi, '_')}_trinity_test3_${taskKey}.txt`;
+            document.body.appendChild(link); link.click(); document.body.removeChild(link);
+            alert(`💾 ¡Archivo descargado con éxito!\n\nTu redacción se ha guardado en tu carpeta de Descargas como un archivo de texto (.txt).\n\nAhora:\n1. Abre tu Gmail o Hotmail.\n2. Redacta un mensaje nuevo adjuntando este archivo.\n3. Envíalo a tu profesor al correo:\n👉 franciscodecio@gmail.com`);
+        }
+    </script>
+</body>
+</html>
