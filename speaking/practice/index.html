@@ -27,7 +27,7 @@
             <input id="st-surname" oninput="updateTitles()" placeholder="Apellido(s) (ej. García López)" class="p-2 border rounded bg-white focus:ring-2 focus:ring-indigo-400 outline-none">
         </div>
         <div class="text-xs text-indigo-900 bg-white/70 p-3 rounded border border-indigo-100 leading-relaxed space-y-1">
-            <p>📱 <strong>Cómo enviarme tus audios por WhatsApp:</strong> cada parte se envía por separado con este título: <span class="font-mono bg-indigo-100 px-1 rounded">Speaking-Parte1-Nombre-Apellido</span>.</p>
+            <p>📱 <strong>Cómo enviarme tus audios por WhatsApp:</strong> cada parte se envía por separado con su título: <span class="font-mono bg-indigo-100 px-1 rounded">Speaking-Parte1-Nombre-Apellido</span>, <span class="font-mono bg-indigo-100 px-1 rounded">Speaking-Parte2-…</span>, <span class="font-mono bg-indigo-100 px-1 rounded">Listening-Parte1-…</span> y <span class="font-mono bg-indigo-100 px-1 rounded">Listening-Parte2-…</span></p>
             <p><strong>Opción A (recomendada):</strong> graba con el grabador de cada parte. El archivo se crea ya con el nombre correcto; pulsa <em>Compartir</em> (en el móvil) y elige WhatsApp, o <em>Descargar</em> y adjúntalo.</p>
             <p><strong>Opción B:</strong> envía una nota de voz de WhatsApp y, justo antes, escribe el título como mensaje (puedes copiarlo con el botón <em>Copiar título</em>).</p>
             <p>🎧 Usa auriculares para que el audio del examen no se grabe encima de tu voz, y pausa la grabación mientras escuchas.</p>
@@ -36,18 +36,18 @@
 
     <!-- PART TABS -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-6 bg-slate-100 p-2 rounded-lg border border-slate-200">
-        <button onclick="showPart(1)" id="tab-1" class="part-tab py-3 px-2 font-bold text-sm rounded-md cursor-pointer">🗣️ Parte 1<br><span class="font-medium text-xs">Topic</span></button>
-        <button onclick="showPart(2)" id="tab-2" class="part-tab py-3 px-2 font-bold text-sm rounded-md cursor-pointer">💬 Parte 2<br><span class="font-medium text-xs">Conversation</span></button>
-        <button onclick="showPart(3)" id="tab-3" class="part-tab py-3 px-2 font-bold text-sm rounded-md cursor-pointer">🎧 Parte 3<br><span class="font-medium text-xs">Listening Task 1</span></button>
-        <button onclick="showPart(4)" id="tab-4" class="part-tab py-3 px-2 font-bold text-sm rounded-md cursor-pointer">📝 Parte 4<br><span class="font-medium text-xs">Listening Task 2</span></button>
+        <button onclick="showPart(1)" id="tab-1" class="part-tab py-3 px-2 font-bold text-sm rounded-md cursor-pointer">🗣️ Speaking 1<br><span class="font-medium text-xs">Topic</span></button>
+        <button onclick="showPart(2)" id="tab-2" class="part-tab py-3 px-2 font-bold text-sm rounded-md cursor-pointer">💬 Speaking 2<br><span class="font-medium text-xs">Conversation</span></button>
+        <button onclick="showPart(3)" id="tab-3" class="part-tab py-3 px-2 font-bold text-sm rounded-md cursor-pointer">🎧 Listening 1<br><span class="font-medium text-xs">6 preguntas</span></button>
+        <button onclick="showPart(4)" id="tab-4" class="part-tab py-3 px-2 font-bold text-sm rounded-md cursor-pointer">📝 Listening 2<br><span class="font-medium text-xs">Idea + 6 datos</span></button>
     </div>
 
     <!-- ================= PARTE 1: TOPIC ================= -->
     <section id="part-1" class="part space-y-5">
         <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg text-sm space-y-1">
-            <p class="font-bold text-indigo-900 text-base">Parte 1 — Topic task (4 minutos)</p>
+            <p class="font-bold text-indigo-900 text-base">Speaking Parte 1 — Topic task (4 minutos)</p>
             <p>Tú eliges el tema. Rellena tu <strong>Topic Form</strong> (el título y 4 puntos de los que quieres hablar). En el examen se lo das al examinador y él te hace preguntas a partir de esos puntos. No es un monólogo memorizado: es una conversación sobre tu tema.</p>
-            <p class="text-xs text-indigo-800">⚠️ El tema no puede ser uno de los de la Parte 2 (Travel, Money, Fashion, Rules and regulations, Health and fitness, Learning a foreign language).</p>
+            <p class="text-xs text-indigo-800">⚠️ El tema no puede ser uno de los de la Speaking Parte 2 (Travel, Money, Fashion, Rules and regulations, Health and fitness, Learning a foreign language).</p>
         </div>
 
         <div class="border rounded-lg p-4 space-y-3">
@@ -81,7 +81,7 @@
     <!-- ================= PARTE 2: CONVERSATION ================= -->
     <section id="part-2" class="part hidden space-y-5">
         <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg text-sm space-y-1">
-            <p class="font-bold text-indigo-900 text-base">Parte 2 — Conversation task (2 minutos)</p>
+            <p class="font-bold text-indigo-900 text-base">Speaking Parte 2 — Conversation task (2 minutos)</p>
             <p>El examinador elige uno de estos 6 temas y te hace preguntas. Tú das tu opinión, la explicas y también le preguntas a él. No sabes qué tema te tocará, así que hay que practicar todos.</p>
         </div>
         <div class="flex flex-wrap gap-2">
@@ -102,7 +102,7 @@
     <!-- ================= PARTE 3: LISTENING TASK 1 ================= -->
     <section id="part-3" class="part hidden space-y-5">
         <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg text-sm space-y-1">
-            <p class="font-bold text-indigo-900 text-base">Parte 3 — Independent Listening Task 1</p>
+            <p class="font-bold text-indigo-900 text-base">Listening Parte 1 — Independent Listening Task 1</p>
             <p>Escuchas una charla corta <strong>dos veces seguidas</strong> y puedes tomar notas. Después el examinador te hace <strong>6 preguntas</strong> y contestas con pocas palabras.</p>
             <p class="text-xs text-indigo-800">Audios oficiales de práctica de Trinity College London.</p>
         </div>
@@ -132,7 +132,7 @@
     <!-- ================= PARTE 4: LISTENING TASK 2 ================= -->
     <section id="part-4" class="part hidden space-y-5">
         <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg text-sm space-y-1">
-            <p class="font-bold text-indigo-900 text-base">Parte 4 — Independent Listening Task 2</p>
+            <p class="font-bold text-indigo-900 text-base">Listening Parte 2 — Independent Listening Task 2</p>
             <p>1) Escuchas <strong>una vez</strong> sin notas y dices en pocas palabras <strong>de qué trata</strong>. 2) Escuchas <strong>otra vez</strong> tomando notas. 3) Dices <strong>6 datos</strong> de la charla. 4) El examinador te hace <strong>4 preguntas</strong> más.</p>
             <p class="text-xs text-indigo-800">Audios oficiales de práctica de Trinity College London.</p>
         </div>
@@ -378,10 +378,11 @@ function fullName() {
     return [document.getElementById('st-name').value.trim(), document.getElementById('st-surname').value.trim()].filter(Boolean).join(' ');
 }
 function fileSafe(s) { return s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+function partLabel(part) { return part <= 2 ? `Speaking Parte${part}` : `Listening Parte${part - 2}`; }
 function titleFor(part) {
     const n = fileSafe(document.getElementById('st-name').value.trim()) || 'Nombre';
     const s = fileSafe(document.getElementById('st-surname').value.trim()) || 'Apellido';
-    return `Speaking-Parte${part}-${n}-${s}`;
+    return `${partLabel(part).replace(' ', '-')}-${n}-${s}`;
 }
 function updateTitles() { [1, 2, 3, 4].forEach(p => { const el = document.getElementById('title-' + p); if (el) el.innerText = titleFor(p); }); }
 function download(blob, name) {
@@ -395,7 +396,7 @@ function buildRecorder(part) {
     document.getElementById('rec-' + part).innerHTML = `
     <div class="border-2 border-rose-200 bg-rose-50 rounded-lg p-4 space-y-3">
         <div class="flex flex-wrap items-center justify-between gap-2">
-            <p class="font-bold text-rose-900">🎙️ Grabador — Parte ${part}</p>
+            <p class="font-bold text-rose-900">🎙️ Grabador — ${partLabel(part).replace('Parte', 'Parte ')}</p>
             <p class="text-xs">Título: <span id="title-${part}" class="font-mono font-bold bg-white px-1.5 py-0.5 rounded border">${titleFor(part)}</span></p>
         </div>
         <div class="flex flex-wrap gap-2 items-center">
