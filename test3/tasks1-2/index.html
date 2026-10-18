@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE I - Test 3 Interactive Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .correct { background-color: #d1fae5 !important; border-color: #10b981 !important; color: #065f46; }
+        .incorrect { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b; }
+        .missed { background-color: #fef9c3 !important; border-color: #facc15 !important; color: #854d0e; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 min-h-screen p-4 md:p-8">
+
+<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden p-6 border border-gray-200">
+
+    <!-- HEADER -->
+    <div class="text-center border-b-2 border-indigo-100 pb-4 mb-6">
+        <h1 class="text-4xl font-extrabold text-indigo-600 tracking-tight">Succeed in TRINITY ISE I</h1>
+        <p class="text-gray-500 font-semibold mt-1 text-lg">Exam Preparation Simulator — Test 3</p>
+    </div>
+
+    <!-- TIMER -->
+    <div class="flex flex-wrap items-center justify-center gap-3 mb-6 bg-amber-50 border border-amber-200 rounded-lg p-3 text-sm">
+        <span class="font-bold text-amber-900">⏱️ Cronómetro (20 minutos por tarea):</span>
+        <span id="timer" class="font-mono text-xl font-bold text-amber-800 bg-white px-3 py-1 rounded border border-amber-200">20:00</span>
+        <button onclick="startTimer()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-3 py-1.5 rounded cursor-pointer">Empezar</button>
+        <button onclick="resetTimer()" class="bg-white hover:bg-amber-100 text-amber-800 font-bold px-3 py-1.5 rounded border border-amber-300 cursor-pointer">Reiniciar</button>
+    </div>
+
+    <!-- MAIN TASK SWITCHER -->
+    <div class="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-8 bg-slate-100 p-2 rounded-lg border border-slate-200">
+        <button onclick="switchMainTask('task1')" id="btn-task1" class="main-btn flex-1 py-3 font-bold text-center rounded-md bg-indigo-600 text-white shadow-sm cursor-pointer transition">
+            🎬 TASK 1: Long Reading (Silent films)
+        </button>
+        <button onclick="switchMainTask('task2')" id="btn-task2" class="main-btn flex-1 py-3 font-bold text-center rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 cursor-pointer transition">
+            🌍 TASK 2: Multi-text Reading (Learning languages)
+        </button>
+    </div>
+
+    <!-- ========================= TASK 1 ========================= -->
+    <div id="task1" class="main-task">
+
+        <div class="flex space-x-1 mb-6 border-b border-gray-200 pb-2 overflow-x-auto">
+            <button onclick="switchSubTab('t1','t1-text')" id="btn-t1-text" class="sub-btn-t1 px-4 py-2 font-semibold text-sm rounded-t-lg bg-indigo-600 text-white cursor-pointer whitespace-nowrap">Reading Text</button>
+            <button onclick="switchSubTab('t1','t1-ex1')" id="btn-t1-ex1" class="sub-btn-t1 px-4 py-2 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap">Questions 1-5 (Titles)</button>
+            <button onclick="switchSubTab('t1','t1-ex2')" id="btn-t1-ex2" class="sub-btn-t1 px-4 py-2 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap">Questions 6-10 (True)</button>
+            <button onclick="switchSubTab('t1','t1-ex3')" id="btn-t1-ex3" class="sub-btn-t1 px-4 py-2 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap">Questions 11-15 (Gaps)</button>
+        </div>
+
+        <!-- T1 TEXT -->
+        <div id="t1-text" class="t1-tab space-y-4 text-justify leading-relaxed">
+            <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg space-y-2">
+                <p class="text-indigo-900 font-bold text-base">📢 INSTRUCCIONES DE LA TAREA 1:</p>
+                <p class="text-indigo-950 text-xs italic font-medium bg-white px-3 py-1.5 rounded border border-indigo-100 inline-block">
+                    "Read the following text about silent films and answer the 15 questions on the next page."
+                </p>
+                <div class="text-indigo-800 text-xs space-y-1">
+                    <p><strong>1. Lectura comprensiva:</strong> Lee los 5 párrafos del texto sobre el cine mudo (<strong>Before the 'talkies'</strong>).</p>
+                    <p><strong>2. Responder y comprobar:</strong> Pasa por las pestañas de preguntas. Al pulsar el botón azul de cada pantalla recibirás la corrección con la explicación.</p>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold text-gray-900 border-l-4 border-indigo-500 pl-2">Before the 'talkies'</h2>
+            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                <span class="font-bold text-indigo-700 block mb-1">Paragraph 1</span>
+                Until the 1920s, the technology to produce films with sound did not really exist. <em>The Jazz Singer</em>, released in 1927, was the first truly successful sound film. Its success marked a new period in film-making and led to a huge increase in the number of talking pictures, or 'talkies' as they would become known. The popularity of silent films suffered badly as a result and it was not long before 'talkies' took over completely and silent films disappeared. Today, it is thought that around 70% of all American silent films have been lost forever. And this is a very sad fact indeed.
+            </div>
+            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                <span class="font-bold text-indigo-700 block mb-1">Paragraph 2</span>
+                You see, it is too easy to think of silent films as boring and old-fashioned, full of weak acting and bad storylines. The truth is actually very different. Silent films were, in fact, beautiful works of art, as good as any of the talking films of today. For a start, they were not silent at all. If you had lived at the time of silent films, a visit to the cinema would have been a celebration of sound – or music, to be more accurate. Live music almost always formed part of a silent film show. At small-town theatres maybe just a guitar or piano would play, but, at large ones, whole orchestras often performed.
+            </div>
+            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                <span class="font-bold text-indigo-700 block mb-1">Paragraph 3</span>
+                True, the acting was very different, but different does not equal bad. The actors were far more dramatic in the way they performed. They made big movements with their bodies and faces, which can look almost silly when compared with today's acting style. But actors could not use words to express meaning so they had to rely on movements. It was a different skill; not silly, but in fact necessary to the telling of the story.
+            </div>
+            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                <span class="font-bold text-indigo-700 block mb-1">Paragraph 4</span>
+                And good storytelling was at the heart of silent films. The style of storytelling was just very different from today. In the early years of silent films, theatres would pay storytellers to narrate the stories live in the cinema. However, as films got longer, it made more sense to use intertitles (short pieces of text that appeared on screen between scenes). You had to concentrate hard to follow the story, but was that such a bad thing?
+            </div>
+            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                <span class="font-bold text-indigo-700 block mb-1">Paragraph 5</span>
+                To compare silent films with today's ones is not fair. They are just too different. It is still possible to enjoy silent movies if we stop making such comparisons. They are a different art form and they are wonderful in their own right. The 2012 silent film <em>The Artist</em> reminded us of this and showed us that, even today, a well-made silent movie can be celebrated and enjoyed.
+            </div>
+            <div class="flex justify-end">
+                <button onclick="switchSubTab('t1','t1-ex1')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg cursor-pointer">Ir a las preguntas →</button>
+            </div>
+        </div>
+
+        <!-- T1 EX1: TITLES -->
+        <div id="t1-ex1" class="t1-tab hidden space-y-4">
+            <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+                <p class="font-bold text-indigo-900">Questions 1-5 (one mark per question)</p>
+                <p class="text-sm text-indigo-900 italic">The text has five paragraphs (1-5). Choose the best title for each paragraph from A-F below. There is one title you don't need.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 text-sm space-y-1">
+                    <p><strong>A</strong> A live musical experience</p>
+                    <p><strong>B</strong> Recognising the value of silent films</p>
+                    <p><strong>C</strong> Acting without words</p>
+                    <p><strong>D</strong> The end of silent films</p>
+                    <p><strong>E</strong> Telling the silent story</p>
+                    <p><strong>F</strong> The best silent film</p>
+                </div>
+                <div id="t1-titles" class="space-y-2"></div>
+            </div>
+            <div id="t1-ex1-score" class="hidden"></div>
+            <div class="flex justify-end gap-2">
+                <button onclick="resetSection('t1-ex1')" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-4 py-2.5 rounded-lg cursor-pointer">Borrar</button>
+                <button onclick="checkSelects('t1-ex1')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg cursor-pointer">Comprobar respuestas</button>
+            </div>
+        </div>
+
+        <!-- T1 EX2: TRUE STATEMENTS -->
+        <div id="t1-ex2" class="t1-tab hidden space-y-4">
+            <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+                <p class="font-bold text-indigo-900">Questions 6-10 (one mark per question)</p>
+                <p class="text-sm text-indigo-900 italic">Choose the <strong>five</strong> statements from A-H below that are TRUE according to the information given in the text.</p>
+            </div>
+            <div id="t1-true" class="space-y-2"></div>
+            <div id="t1-ex2-score" class="hidden"></div>
+            <div class="flex justify-end gap-2">
+                <button onclick="resetSection('t1-ex2')" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-4 py-2.5 rounded-lg cursor-pointer">Borrar</button>
+                <button onclick="checkTrue('t1-ex2')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg cursor-pointer">Comprobar respuestas</button>
+            </div>
+        </div>
+
+        <!-- T1 EX3: GAPS -->
+        <div id="t1-ex3" class="t1-tab hidden space-y-4">
+            <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+                <p class="font-bold text-indigo-900">Questions 11-15 (one mark per question)</p>
+                <p class="text-sm text-indigo-900 italic">Complete sentences 11-15 with a word, phrase or number from the text (maximum three words).</p>
+            </div>
+            <div id="t1-gaps" class="space-y-3"></div>
+            <div id="t1-ex3-score" class="hidden"></div>
+            <div class="flex justify-end gap-2">
+                <button onclick="resetSection('t1-ex3')" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-4 py-2.5 rounded-lg cursor-pointer">Borrar</button>
+                <button onclick="checkGaps('t1-ex3')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg cursor-pointer">Comprobar respuestas</button>
+            </div>
+            <div class="flex justify-center pt-2">
+                <button onclick="showTotal('t1')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-lg cursor-pointer">🏁 Ver mi nota total de la Task 1</button>
+            </div>
+            <div id="t1-total" class="hidden"></div>
+        </div>
+    </div>
+
+    <!-- ========================= TASK 2 ========================= -->
+    <div id="task2" class="main-task hidden">
+
+        <div class="flex space-x-1 mb-6 border-b border-gray-200 pb-2 overflow-x-auto">
+            <button onclick="switchSubTab('t2','t2-text')" id="btn-t2-text" class="sub-btn-t2 px-4 py-2 font-semibold text-sm rounded-t-lg bg-indigo-600 text-white cursor-pointer whitespace-nowrap">Texts A-D</button>
+            <button onclick="switchSubTab('t2','t2-ex1')" id="btn-t2-ex1" class="sub-btn-t2 px-4 py-2 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap">Questions 16-20 (Which text?)</button>
+            <button onclick="switchSubTab('t2','t2-ex2')" id="btn-t2-ex2" class="sub-btn-t2 px-4 py-2 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap">Questions 21-25 (True)</button>
+            <button onclick="switchSubTab('t2','t2-ex3')" id="btn-t2-ex3" class="sub-btn-t2 px-4 py-2 font-semibold text-sm rounded-t-lg bg-gray-200 text-gray-700 cursor-pointer whitespace-nowrap">Questions 26-30 (Notes)</button>
+        </div>
+
+        <!-- T2 TEXTS -->
+        <div id="t2-text" class="t2-tab space-y-5 leading-relaxed">
+            <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg space-y-2">
+                <p class="text-indigo-900 font-bold text-base">📢 INSTRUCCIONES DE LA TAREA 2:</p>
+                <p class="text-indigo-950 text-xs italic font-medium bg-white px-3 py-1.5 rounded border border-indigo-100 inline-block">
+                    "In this part there are four short texts for you to read and 15 questions for you to answer."
+                </p>
+                <p class="text-indigo-800 text-xs">Consejo: en el examen real conviene leer primero las preguntas 16-20 y después los textos. Puedes volver a esta pestaña siempre que quieras.</p>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-indigo-700 mb-1">Text A</h3>
+                <div class="bg-sky-50 border border-sky-200 rounded-lg p-4 space-y-2">
+                    <p class="text-center font-bold">What is the best way to learn a foreign language?</p>
+                    <p><strong>Diego, Argentina:</strong> For me the best way is by going to language-learning websites on the Internet. Some of them are really interesting. It's also cheap and easy.</p>
+                    <p><strong>Kirsten, Sweden:</strong> I think watching English films with Swedish subtitles is the best. I love films, so my studying is really enjoyable.</p>
+                    <p><strong>Yoko, Japan:</strong> Without doubt, the best way to learn any language is to use it all the time with native speakers. So you should spend time abroad in an English-speaking country.</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-indigo-700 mb-1">Text B</h3>
+                <div class="bg-sky-50 border border-sky-200 rounded-lg p-4 space-y-2">
+                    <p><strong>Student name:</strong> Vanessa Smith<br><strong>Class:</strong> 4B<br><strong>Language experiment</strong></p>
+                    <p>Yesterday my class learnt about research at the Clarkson School of Music, in Nottingham University, on the effect of using music when learning a language. They found that using music helps people to remember what they learn.</p>
+                    <p>Today in class we did an experiment to see if music helped us to learn Russian. We chose Russian because nobody in the class could speak it at all. Our teacher, Mr Carter, divided us into three groups, A, B and C. The students in Group A heard spoken Russian phrases on a tape. For Group B, the same phrases were set to a rhythm like a rap, and Group C heard the same phrases sung in a song. All of us tried to remember the phrases, and repeat them fifteen minutes later. We found that Group C were able to remember far more Russian phrases than the other two groups. We therefore concluded that learning a language sung in a song helps you to remember it better.</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-indigo-700 mb-1">Text C</h3>
+                <div class="bg-sky-50 border border-sky-200 rounded-lg p-4 space-y-2">
+                    <p>Scientists have found that learning a second language increases intelligence. There have been many studies which find that people who regularly speak more than one language are better at solving problems. Other experiments show that students who speak a foreign language generally do better at tests than students who only speak one language. This is particularly the case with tests in music, reading and maths.</p>
+                    <p>In a recent experiment, researchers from Cambridge University studied the part of the brain which processes information. They found that being bilingual changed this part of the brain. They compared this change to the way in which muscles change when a person exercises a lot.</p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-indigo-700 mb-1">Text D</h3>
+                <div class="bg-sky-50 border border-sky-200 rounded-lg p-4">
+                    <p class="text-center font-bold mb-3">🌍 Why students choose to learn foreign languages?</p>
+                    <div id="chart-d" class="space-y-2 text-sm"></div>
+                </div>
+            </div>
+            <div class="flex justify-end">
+                <button onclick="switchSubTab('t2','t2-ex1')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg cursor-pointer">Ir a las preguntas →</button>
+            </div>
+        </div>
+
+        <!-- T2 EX1 -->
+        <div id="t2-ex1" class="t2-tab hidden space-y-4">
+            <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+                <p class="font-bold text-indigo-900">Questions 16-20 (one mark per question)</p>
+                <p class="text-sm text-indigo-900 italic">Decide which text each question refers to. Choose one letter – A, B, C or D. You can use any letter more than once.</p>
+            </div>
+            <p class="font-semibold text-sm text-gray-600">Which text...</p>
+            <div id="t2-which" class="space-y-2"></div>
+            <div id="t2-ex1-score" class="hidden"></div>
+            <div class="flex justify-end gap-2">
+                <button onclick="resetSection('t2-ex1')" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-4 py-2.5 rounded-lg cursor-pointer">Borrar</button>
+                <button onclick="checkSelects('t2-ex1')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg cursor-pointer">Comprobar respuestas</button>
+            </div>
+        </div>
+
+        <!-- T2 EX2 -->
+        <div id="t2-ex2" class="t2-tab hidden space-y-4">
+            <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+                <p class="font-bold text-indigo-900">Questions 21-25 (one mark per question)</p>
+                <p class="text-sm text-indigo-900 italic">Choose the <strong>five</strong> statements from A-H below that are TRUE according to the information given in the texts alone.</p>
+            </div>
+            <div id="t2-true" class="space-y-2"></div>
+            <div id="t2-ex2-score" class="hidden"></div>
+            <div class="flex justify-end gap-2">
+                <button onclick="resetSection('t2-ex2')" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-4 py-2.5 rounded-lg cursor-pointer">Borrar</button>
+                <button onclick="checkTrue('t2-ex2')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg cursor-pointer">Comprobar respuestas</button>
+            </div>
+        </div>
+
+        <!-- T2 EX3 -->
+        <div id="t2-ex3" class="t2-tab hidden space-y-4">
+            <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+                <p class="font-bold text-indigo-900">Questions 26-30 (one mark per question)</p>
+                <p class="text-sm text-indigo-900 italic">The summary notes below contain information from the texts. Find a suitable word or phrase in the texts A-D to complete gaps 26-30. You can use up to 3 words.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-4 text-sm">
+                <p class="font-bold underline text-indigo-800">Summary notes</p>
+                <div>
+                    <p class="font-semibold">Good ways of learning another language include:</p>
+                    <ul class="list-disc pl-6 space-y-2 mt-1">
+                        <li>television, e.g. watching subtitled films</li>
+                        <li id="t2g26-container" class="gap-row p-1 rounded border border-transparent"><strong>(26.)</strong> <input id="t2g26" class="gap-input border-b-2 border-indigo-300 bg-white px-2 py-0.5 w-48 outline-none focus:border-indigo-600" autocomplete="off"> so you can speak with native speakers</li>
+                        <li id="t2g27-container" class="gap-row p-1 rounded border border-transparent">listen to new words recorded as a <strong>(27.)</strong> <input id="t2g27" class="gap-input border-b-2 border-indigo-300 bg-white px-2 py-0.5 w-40 outline-none focus:border-indigo-600" autocomplete="off"></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-semibold">Reasons to learn a second language include:</p>
+                    <ul class="list-disc pl-6 space-y-2 mt-1">
+                        <li id="t2g28-container" class="gap-row p-1 rounded border border-transparent">increasing the student's <strong>(28.)</strong> <input id="t2g28" class="gap-input border-b-2 border-indigo-300 bg-white px-2 py-0.5 w-40 outline-none focus:border-indigo-600" autocomplete="off"></li>
+                        <li>it is enjoyable to learn</li>
+                        <li id="t2g29-container" class="gap-row p-1 rounded border border-transparent">getting better marks in <strong>(29.)</strong> <input id="t2g29" class="gap-input border-b-2 border-indigo-300 bg-white px-2 py-0.5 w-40 outline-none focus:border-indigo-600" autocomplete="off"></li>
+                        <li>getting a better job</li>
+                        <li id="t2g30-container" class="gap-row p-1 rounded border border-transparent">the language is required in order to study for a university <strong>(30.)</strong> <input id="t2g30" class="gap-input border-b-2 border-indigo-300 bg-white px-2 py-0.5 w-40 outline-none focus:border-indigo-600" autocomplete="off"></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="t2-ex3-score" class="hidden"></div>
+            <div class="flex justify-end gap-2">
+                <button onclick="resetSection('t2-ex3')" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-4 py-2.5 rounded-lg cursor-pointer">Borrar</button>
+                <button onclick="checkGaps('t2-ex3')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-5 py-2.5 rounded-lg cursor-pointer">Comprobar respuestas</button>
+            </div>
+            <div class="flex justify-center pt-2">
+                <button onclick="showTotal('t2')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-lg cursor-pointer">🏁 Ver mi nota total de la Task 2</button>
+            </div>
+            <div id="t2-total" class="hidden"></div>
+        </div>
+    </div>
+
+    <p class="text-center text-xs text-gray-400 mt-8 border-t pt-4">Puedes repetir los ejercicios todas las veces que quieras. Objetivo de referencia: al menos 9 de 15 respuestas correctas (60%) en cada tarea.</p>
+</div>
+
+<script>
+// ======================= DATA =======================
+const DATA = {
+    't1-ex1': {
+        type: 'select', target: 't1-titles', options: ['A','B','C','D','E','F'],
+        items: [
+            { id: 'q1', label: '1. Paragraph 1', answer: 'D', exp: 'Respuesta: D (The end of silent films). El párrafo 1 explica cómo el éxito de The Jazz Singer y de las "talkies" hizo desaparecer el cine mudo.' },
+            { id: 'q2', label: '2. Paragraph 2', answer: 'A', exp: 'Respuesta: A (A live musical experience). El párrafo 2 explica que las películas mudas iban acompañadas de música en directo: guitarra, piano u orquestas completas.' },
+            { id: 'q3', label: '3. Paragraph 3', answer: 'C', exp: 'Respuesta: C (Acting without words). El párrafo 3 habla de la interpretación: los actores no podían usar palabras y dependían de movimientos del cuerpo y la cara.' },
+            { id: 'q4', label: '4. Paragraph 4', answer: 'E', exp: 'Respuesta: E (Telling the silent story). El párrafo 4 trata de cómo se contaba la historia: narradores en la sala y, después, intertitles.' },
+            { id: 'q5', label: '5. Paragraph 5', answer: 'B', exp: 'Respuesta: B (Recognising the value of silent films). El párrafo 5 defiende que el cine mudo es un arte maravilloso en sí mismo. Ojo: F (The best silent film) es la distractora; The Artist se menciona solo como ejemplo.' }
+        ]
+    },
+    't1-ex2': {
+        type: 'true', target: 't1-true', correct: ['A','B','D','F','H'],
+        items: {
+            A: ['The writer thinks it is a mistake to compare silent and sound films with one another.', 'Verdadera. Párrafo 5: "To compare silent films with today\'s ones is not fair."'],
+            B: ['The method of acting in silent films was often different from the method now used in sound films.', 'Verdadera. Párrafo 3: "the acting was very different… far more dramatic".'],
+            C: ['The writer suggests that the acting in silent films was not of a good quality.', 'Falsa. El autor dice lo contrario: "different does not equal bad".'],
+            D: ['It is believed that most American silent films have been destroyed.', 'Verdadera. Párrafo 1: around 70% "have been lost forever".'],
+            E: ['The Jazz Singer was the first very successful silent film.', 'Falsa. The Jazz Singer fue la primera película SONORA de éxito, no muda.'],
+            F: ['The story of early silent movies was often told to the audience by a live speaker in the cinema.', 'Verdadera. Párrafo 4: "theatres would pay storytellers to narrate the stories live".'],
+            G: ['In small cinemas, the music for silent films was often performed by orchestras.', 'Falsa. En los cines pequeños tocaba una guitarra o un piano; las orquestas eran de los cines grandes.'],
+            H: ['Live music was usually played at screenings of silent films.', 'Verdadera. Párrafo 2: "Live music almost always formed part of a silent film show."']
+        }
+    },
+    't1-ex3': {
+        type: 'gap', target: 't1-gaps',
+        items: [
+            { id: 'g11', before: '11. Before the 1920s, there wasn\'t the right kind of', after: 'to make sound movies.', accept: ['technology'], show: 'technology', exp: 'Párrafo 1: "the technology to produce films with sound did not really exist".' },
+            { id: 'g12', before: '12. In small cinemas, music for silent films was usually played on', after: '.', accept: ['guitar or piano','a guitar or piano','a guitar or a piano','guitar or a piano','guitar','piano','a guitar','a piano'], show: '(a) guitar or piano', exp: 'Párrafo 2: "At small-town theatres maybe just a guitar or piano would play".' },
+            { id: 'g13', before: '13. Actors moved their', after: 'a lot in silent movies to express themselves without using words.', accept: ['bodies and faces','bodies and their faces','body and face'], show: 'bodies and faces', exp: 'Párrafo 3: "They made big movements with their bodies and faces".' },
+            { id: 'g14', before: '14. Intertitles were short pieces of text that were often shown', after: 'in a silent film to explain the story.', accept: ['between scenes','on screen','on the screen'], show: 'between scenes', exp: 'Párrafo 4: "short pieces of text that appeared on screen between scenes".' },
+            { id: 'g15', before: '15. The writer argues that the silent film is a completely different', after: 'from the sound film.', accept: ['art form','form of art'], show: 'art form', exp: 'Párrafo 5: "They are a different art form".' }
+        ]
+    },
+    't2-ex1': {
+        type: 'select', target: 't2-which', options: ['A','B','C','D'],
+        items: [
+            { id: 'q16', label: '16. suggests that people who learn more than one language do better at school?', answer: 'C', exp: 'Respuesta: C. "students who speak a foreign language generally do better at tests".' },
+            { id: 'q17', label: '17. shows that more people choose to learn a language for work rather than for pleasure?', answer: 'D', exp: 'Respuesta: D. El gráfico: 43% por oportunidades de empleo frente a 9% por interés personal.' },
+            { id: 'q18', label: '18. explains that music helps us learn?', answer: 'B', exp: 'Respuesta: B. El experimento de Vanessa: el grupo que oyó las frases cantadas recordó mucho más.' },
+            { id: 'q19', label: '19. says that travelling can help language learners?', answer: 'A', exp: 'Respuesta: A. Yoko: "you should spend time abroad in an English-speaking country".' },
+            { id: 'q20', label: '20. says that learning a foreign language can help you learn other skills?', answer: 'C', exp: 'Respuesta: C. Ser bilingüe mejora la resolución de problemas y los resultados en música, lectura y matemáticas.' }
+        ]
+    },
+    't2-ex2': {
+        type: 'true', target: 't2-true', correct: ['B','C','E','F','H'],
+        items: {
+            A: ['Reading words on a TV screen is the best way to learn a language.', 'Falsa. Es solo la opinión personal de Kirsten; los textos no dicen que sea la mejor forma para todos.'],
+            B: ['The Internet can be used to make language learning interesting.', 'Verdadera. Diego (Text A): algunas webs "are really interesting".'],
+            C: ['It is easier to remember words if they are sung to you.', 'Verdadera. Text B: el grupo C, que oyó una canción, recordó más frases.'],
+            D: ['The Clarkson School of Music tested how quickly people learn Russian.', 'Falsa. El experimento con ruso lo hizo la clase de Vanessa, y medía cuánto recordaban, no la rapidez.'],
+            E: ['Speaking two languages regularly changes the brain.', 'Verdadera. Text C: "being bilingual changed this part of the brain".'],
+            F: ['People who speak more than one language are often better at many school exams.', 'Verdadera. Text C: mejores resultados en música, lectura y matemáticas.'],
+            G: ['The most common reason for learning a language is because it is fun.', 'Falsa. El motivo más común es el empleo (43%); interés personal solo 9%.'],
+            H: ['More people learn another language because of their studies rather than their family.', 'Verdadera. Text D: degree requirement 24% frente a family background 3%.']
+        }
+    },
+    't2-ex3': {
+        type: 'gapInline',
+        items: [
+            { id: 't2g26', accept: ['spend time abroad','time abroad','go abroad','spending time abroad','travel abroad'], show: 'spend time abroad', exp: 'Text A (Yoko): "you should spend time abroad".' },
+            { id: 't2g27', accept: ['song','a song'], show: 'song', exp: 'Text B: "phrases sung in a song".' },
+            { id: 't2g28', accept: ['intelligence'], show: 'intelligence', exp: 'Text C: "learning a second language increases intelligence".' },
+            { id: 't2g29', accept: ['tests','test','exams','school tests'], show: 'tests', exp: 'Text C: "do better at tests".' },
+            { id: 't2g30', accept: ['degree','university degree'], show: 'degree', exp: 'Text D: "24% degree requirement".' }
+        ]
+    }
+};
+
+const CHART_D = [['Increase employment opportunities',43],['Degree requirement',24],['Future travel',13],['Personal interest, enjoyment',9],['Study abroad',6],['Family background',3],['Other',1]];
+
+// ======================= BUILD =======================
+function buildAll() {
+    Object.entries(DATA).forEach(([sec, d]) => {
+        const box = d.target ? document.getElementById(d.target) : null;
+        if (d.type === 'select') {
+            box.innerHTML = d.items.map(it => `
+                <div id="${it.id}-container" class="p-3 border rounded-lg flex flex-col gap-2">
+                    <div class="flex items-center justify-between gap-3">
+                        <label for="${it.id}" class="text-sm font-medium">${it.label}</label>
+                        <select id="${it.id}" class="border rounded p-1.5 bg-white font-bold w-20 shrink-0">
+                            <option value="">—</option>${d.options.map(o => `<option value="${o}">${o}</option>`).join('')}
+                        </select>
+                    </div>
+                </div>`).join('');
+        }
+        if (d.type === 'true') {
+            const pre = sec.split('-')[0];
+            box.innerHTML = Object.entries(d.items).map(([l, [txt]]) => `
+                <label id="${pre}-tf-box-${l}" class="flex flex-col p-3 border rounded-lg cursor-pointer hover:bg-slate-50">
+                    <span class="flex items-start gap-3"><input type="checkbox" id="${pre}-tf-${l}" class="mt-1 w-4 h-4 accent-indigo-600"><span><strong>${l}</strong> ${txt}</span></span>
+                </label>`).join('') + `<p id="${sec}-warn" class="hidden text-sm font-bold text-amber-800 bg-amber-50 border border-amber-300 rounded p-2">⚠️ Debes marcar exactamente 5 afirmaciones antes de comprobar.</p>`;
+        }
+        if (d.type === 'gap') {
+            box.innerHTML = d.items.map(it => `
+                <div id="${it.id}-container" class="p-3 border rounded-lg text-sm leading-8">
+                    ${it.before} <input id="${it.id}" class="border-b-2 border-indigo-300 bg-white px-2 py-0.5 w-48 outline-none focus:border-indigo-600" autocomplete="off"> ${it.after}
+                </div>`).join('');
+        }
+    });
+    document.getElementById('chart-d').innerHTML = CHART_D.map(([k, v]) => `
+        <div class="flex items-center gap-2">
+            <span class="w-52 shrink-0 text-right text-xs md:text-sm">${k}</span>
+            <div class="flex-1 bg-white rounded h-6 border border-sky-100"><div class="bg-indigo-500 h-full rounded text-white text-xs font-bold flex items-center pl-2" style="width:${Math.max(v*2,6)}%">${v}%</div></div>
+        </div>`).join('');
+}
+
+// ======================= HELPERS =======================
+const SCORES = {};
+function norm(s) { return s.toLowerCase().replace(/[’']/g, "'").replace(/[.,;:!?"]/g, '').replace(/\s+/g, ' ').trim(); }
+function addExp(container, text, cls) {
+    const p = document.createElement('p');
+    p.className = 'exp text-xs mt-1 font-semibold p-1.5 rounded bg-white/70 w-full border ' + (cls || 'text-red-800 border-red-200');
+    p.innerText = text;
+    container.appendChild(p);
+}
+function clearExp(sec) { document.querySelectorAll('#' + sec + ' .exp').forEach(e => e.remove()); }
+function showScore(sec, score, max) {
+    SCORES[sec] = score;
+    const el = document.getElementById(sec + '-score');
+    el.className = 'p-3 rounded-lg font-bold text-center ' + (score === max ? 'bg-emerald-100 text-emerald-800' : score >= Math.ceil(max * 0.6) ? 'bg-sky-100 text-sky-800' : 'bg-amber-100 text-amber-800');
+    el.innerText = `Resultado: ${score} / ${max}` + (score === max ? ' — ¡Perfecto!' : '');
+}
+
+// ======================= CHECKERS =======================
+function checkSelects(sec) {
+    const d = DATA[sec]; clearExp(sec); let score = 0;
+    d.items.forEach(it => {
+        const c = document.getElementById(it.id + '-container');
+        const ok = document.getElementById(it.id).value === it.answer;
+        c.classList.remove('correct', 'incorrect'); c.classList.add(ok ? 'correct' : 'incorrect');
+        if (ok) score++; else addExp(c, it.exp);
+    });
+    showScore(sec, score, d.items.length);
+}
+function checkTrue(sec) {
+    const d = DATA[sec]; const pre = sec.split('-')[0]; clearExp(sec);
+    const letters = Object.keys(d.items);
+    const checked = letters.filter(l => document.getElementById(`${pre}-tf-${l}`).checked);
+    const warn = document.getElementById(sec + '-warn');
+    if (checked.length !== 5) { warn.classList.remove('hidden'); return; }
+    warn.classList.add('hidden');
+    let score = 0;
+    letters.forEach(l => {
+        const box = document.getElementById(`${pre}-tf-box-${l}`);
+        const isTrue = d.correct.includes(l), isChecked = checked.includes(l);
+        box.classList.remove('correct', 'incorrect', 'missed', 'opacity-50');
+        if (isTrue && isChecked) { box.classList.add('correct'); score++; }
+        else if (isTrue && !isChecked) { box.classList.add('missed'); addExp(box, 'Debiste marcarla. ' + d.items[l][1], 'text-yellow-800 border-yellow-300'); }
+        else if (!isTrue && isChecked) { box.classList.add('incorrect'); addExp(box, 'No debiste marcarla. ' + d.items[l][1]); }
+        else { box.classList.add('opacity-50'); }
+    });
+    showScore(sec, score, 5);
+}
+function checkGaps(sec) {
+    const d = DATA[sec]; clearExp(sec); let score = 0;
+    d.items.forEach(it => {
+        const c = document.getElementById(it.id + '-container');
+        const v = norm(document.getElementById(it.id).value);
+        const ok = v !== '' && it.accept.some(a => v === norm(a) || v === 'the ' + norm(a) || v === 'a ' + norm(a));
+        c.classList.remove('correct', 'incorrect'); c.classList.add(ok ? 'correct' : 'incorrect');
+        if (ok) score++; else addExp(c, `Respuesta: ${it.show}. ${it.exp}`);
+    });
+    showScore(sec, score, d.items.length);
+}
+function showTotal(pre) {
+    const secs = [pre + '-ex1', pre + '-ex2', pre + '-ex3'];
+    const el = document.getElementById(pre + '-total');
+    const missing = secs.filter(s => SCORES[s] === undefined);
+    el.classList.remove('hidden');
+    if (missing.length) {
+        el.className = 'p-4 rounded-lg bg-amber-50 border border-amber-300 text-amber-900 text-sm font-semibold text-center';
+        el.innerText = '⚠️ Primero comprueba las tres pantallas de preguntas de esta tarea.';
+        return;
+    }
+    const total = secs.reduce((a, s) => a + SCORES[s], 0);
+    const good = total >= 9;
+    el.className = 'p-4 rounded-lg border text-center space-y-1 ' + (good ? 'bg-emerald-50 border-emerald-300 text-emerald-900' : 'bg-amber-50 border-amber-300 text-amber-900');
+    el.innerHTML = `<p class="text-2xl font-extrabold">${total} / 15</p><p class="text-sm font-semibold">${good
+        ? '¡Buen resultado! Estás en la zona segura (60% o más). Sigue practicando para ganar seguridad y rapidez.'
+        : 'Todavía por debajo del objetivo de referencia (9/15). Es completamente normal al principio: revisa las explicaciones y vuelve a intentarlo.'}</p>`;
+}
+function resetSection(sec) {
+    const root = document.getElementById(sec);
+    root.querySelectorAll('select').forEach(s => s.value = '');
+    root.querySelectorAll('input[type=text], input:not([type])').forEach(i => i.value = '');
+    root.querySelectorAll('input[type=checkbox]').forEach(i => i.checked = false);
+    root.querySelectorAll('.correct, .incorrect, .missed, .opacity-50').forEach(e => e.classList.remove('correct', 'incorrect', 'missed', 'opacity-50'));
+    clearExp(sec);
+    const sc = document.getElementById(sec + '-score'); sc.className = 'hidden'; delete SCORES[sec];
+}
+
+// ======================= NAVIGATION =======================
+const ON_MAIN = 'main-btn flex-1 py-3 font-bold text-center rounded-md bg-indigo-600 text-white shadow-sm cursor-pointer transition';
+const OFF_MAIN = 'main-btn flex-1 py-3 font-bold text-center rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 cursor-pointer transition';
+function switchMainTask(id) {
+    document.querySelectorAll('.main-task').forEach(e => e.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+    ['task1', 'task2'].forEach(t => document.getElementById('btn-' + t).className = t === id ? ON_MAIN : OFF_MAIN);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function switchSubTab(pre, id) {
+    document.querySelectorAll('.' + pre + '-tab').forEach(e => e.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+    document.querySelectorAll('.sub-btn-' + pre).forEach(b => {
+        const on = b.id === 'btn-' + id;
+        b.className = `sub-btn-${pre} px-4 py-2 font-semibold text-sm rounded-t-lg cursor-pointer whitespace-nowrap ` + (on ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700');
+    });
+}
+
+// ======================= TIMER =======================
+let remaining = 1200, timerId = null;
+function renderTimer() {
+    const m = String(Math.floor(remaining / 60)).padStart(2, '0'), s = String(remaining % 60).padStart(2, '0');
+    const t = document.getElementById('timer'); t.innerText = `${m}:${s}`;
+    if (remaining === 0) t.classList.add('text-red-600');
+}
+function startTimer() {
+    if (timerId) return;
+    timerId = setInterval(() => {
+        if (remaining > 0) { remaining--; renderTimer(); }
+        if (remaining === 0) { clearInterval(timerId); timerId = null; alert('⏰ ¡Se acabaron los 20 minutos! En el examen real tendrías que pasar a la siguiente tarea.'); }
+    }, 1000);
+}
+function resetTimer() { clearInterval(timerId); timerId = null; remaining = 1200; document.getElementById('timer').classList.remove('text-red-600'); renderTimer(); }
+
+buildAll();
+</script>
+</body>
+</html>
